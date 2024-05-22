@@ -20,11 +20,11 @@ const usersSchema = new mongoose.Schema({
 });
 
 const habitSchema = new mongoose.Schema({
-  habit_id: {
-    type: Number,
-    required: true,
-    unique: true
-  },
+  // habit_id: {
+  //   type: Number,
+  //   required: true,
+  //   unique: true
+  // },
   name_habit: {
     type: String,
     required: true,
@@ -181,7 +181,7 @@ const completedHabitSchema = new mongoose.Schema({
   }
 },);
 let User = mongoose.model("User", usersSchema);
-module.exports = { User };
+// module.exports = { User };
 let Habit = mongoose.model('Habit', habitSchema)
 // module.exports = {Habit};
 let HabitWeekDay = mongoose.model('HabitWeekDay', habitWeekDaySchema);
@@ -195,4 +195,4 @@ let HabitMonthOccurrence = mongoose.model('HabitMonthOccurrence', habitMonthOccu
 let Reminder = mongoose.model('Reminder', reminderSchema);
 // module.exports = {Reminder};
 let CompletedHabit = mongoose.model('CompletedHabit', completedHabitSchema);
-// module.exports = {User, Habit, HabitWeekDay, HabitWeekOccurrence, HabitMonthDay, HabitMonthOccurrence, Reminder, CompletedHabit};
+module.exports = {User, Habit, HabitWeekDay, HabitWeekOccurrence, HabitMonthDay, HabitMonthOccurrence, Reminder, CompletedHabit};

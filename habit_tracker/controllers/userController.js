@@ -1,20 +1,15 @@
-const { User, Habit, HabitWeekDay, HabitWeekOccurrence, HabitMonthDay, HabitMonthOccurrence, Reminder, CompletedHabit } = require("../model/model");
+const {User, Habit, HabitWeekDay, HabitWeekOccurrence, HabitMonthDay, HabitMonthOccurrence, Reminder, CompletedHabit } = require("../model/model");
 
 const userController = {
   
   signup: async (req, res) => {
-    
-      const data = {
-        email_user: req.body.email_user,
-        name_user:req.body.name_user,
-        password_user: req.body.password_user,
-      }
-      const existingUser = await User.findOne({email_user: data.email_user});
+    const newUser = new User(req.body)
+      const existingUser = await User.findOne({email_user: newUser.email_user});
       if(existingUser){
         res.send("email had exist");
 
       }else{
-        const saveUser = await User.insertMany(data);
+        const saveUser = await User.save();
         res.send(saveUser );
         res.send("register success")
       }

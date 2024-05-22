@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 
 const userRoute = require("./routes/user");
-
+const habitRoute = require("./routes/habit");
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URL)
 const db = mongoose.connection;
@@ -22,7 +22,7 @@ app.use(cors());
 app.use(morgan("common"));
 
 app.use("/v1/user", userRoute);
-
+app.use("/v1/habit", habitRoute);
 
 
 app.listen(8000, () =>{

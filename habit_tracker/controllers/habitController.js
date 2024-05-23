@@ -22,6 +22,28 @@ const habitController = {
     } catch (error) {
       res.status(500).json(error);
     }
+  },
+  updateHabit: async(req,res)=>{
+    try {
+      const habit = await Habit.findById(req.params.id);
+      await habit.updateOne({$set: req.body});
+      res.status(200).json("update successfully")
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
+   deleteHabit : async (req, res) => {
+    try {
+      const deletedHabit = await Habit.findByIdAndDelete(req.params.id);
+      if (deletedHabit) {
+        res.status(200).json("Deleted successfully!");
+      } else {
+        res.status(404).json("Habit not found!");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
   }
+  
 };
 module.exports = habitController;

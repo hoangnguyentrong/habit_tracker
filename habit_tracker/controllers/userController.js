@@ -13,9 +13,6 @@ const userController = {
         res.send(saveUser );
         res.send("register success")
       }
-      
-      
-    
   },
   login: async (req, res) => {
     try {
@@ -23,7 +20,6 @@ const userController = {
       if (!user) {
         return res.status(404).json("User not found");
       }
-      // Thực hiện kiểm tra mật khẩu và các bước đăng nhập khác ở đây
       res.status(200).json("login successful");
     } catch (error) {
       res.status(500).json(error);
@@ -41,7 +37,15 @@ const userController = {
       res.status(500).json(error); // Ensure the error variable is used correctly
     }
   },
-
+  updateUser: async(req,res)=>{
+    try {
+      const user = await User.findById(req.params.id);
+      await user.updateOne({$set: req.body});
+      res.status(200).json("update successfully")
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 };
 
 module.exports = userController;

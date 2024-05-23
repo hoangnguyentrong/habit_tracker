@@ -52,7 +52,15 @@ const habitSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 50
-  }
+  },
+  // start_day: {
+  //   type: Date,
+  //   required: true
+  // },
+  // end_day: {
+  //   type: Date,
+    
+  // }
 }, );
 
 
@@ -69,7 +77,8 @@ const habitWeekDaySchema = new mongoose.Schema({
   day_of_week: {
     type: Number,
     required: true
-  }
+  },
+ 
 }, );
 
 

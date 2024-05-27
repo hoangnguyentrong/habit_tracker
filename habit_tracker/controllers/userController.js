@@ -1,7 +1,21 @@
 const {User, Habit, HabitWeekDay, HabitWeekOccurrence, HabitMonthDay, HabitMonthOccurrence, Reminder, CompletedHabit } = require("../model/model");
 
 const userController = {
-  
+
+  login: async (req, res) => {
+    try {
+      const user = new User(req.body);
+      const checkUser = await User.findOne({email_user: user.email_user});
+      // const user = await User.find({email_user: req.body.email_user });
+      if (!checkUser) {
+        res.send("User not found")
+      }
+      res.status(200).json("login successful");
+    } catch (error) {
+      res.send("errr");
+      res.status(500).json(error);
+    }
+  },
   signup: async (req, res) => {
     const newUser = new User(req.body)
       const existingUser = await User.findOne({email_user: newUser.email_user});
@@ -14,17 +28,7 @@ const userController = {
         res.send("register success")
       }
   },
-  login: async (req, res) => {
-    try {
-      const user = await User.find({email_user: req.body.email_user });
-      if (!user) {
-        return res.status(404).json("User not found");
-      }
-      res.status(200).json("login successful");
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
+  
   logout : async (req,res)=>{
     res.status(200).json("");
   },

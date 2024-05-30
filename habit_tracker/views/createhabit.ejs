@@ -1,0 +1,37 @@
+<!-- views/homepage.ejs -->
+<!-- views/createHabit.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Habit</title>
+</head>
+<body>
+  <h1>Create a New Habit</h1>
+  <form action="/v1/habit/create" method="POST">
+    <label for="name_habit">Habit Name:</label>
+    <input type="text" id="name_habit" name="name_habit" required><br>
+
+    <label for="description">Description:</label>
+    <input type="text" id="description" name="description" required><br>
+
+    <label for="goal_type">Goal Type:</label>
+    <input type="text" id="goal_type" name="goal_type" required><br>
+
+    <label for="goal_target">Goal Target:</label>
+    <input type="number" id="goal_target" name="goal_target" required><br>
+
+    <label for="goal_period">Goal Period:</label>
+    <input type="text" id="goal_period" name="goal_period" required><br>
+
+    <label for="start_day">Start Day:</label>
+    <input type="date" id="start_day" name="start_day" required><br>
+
+    <label for="end_day">End Day:</label>
+    <input type="date" id="end_day" name="end_day"><br>
+
+    <button type="submit">Create Habit</button>
+  </form>
+</body>
+</html>

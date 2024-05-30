@@ -1,35 +1,47 @@
-const {User, Habit, HabitWeekDay, HabitWeekOccurrence, HabitMonthDay, HabitMonthOccurrence, Reminder, CompletedHabit } = require("../model/model");
+const { User } = require("../model/model");
 
 const userController = {
+  signup: async (req, res) => {
+    try {
+      console.log("Request Body:", req.body);
+      const newUser = new User({
+        name_user: req.body.name_user,
+        email_user: req.body.email_user,
+        password_user: req.body.password_user,
+      });
+      const existingUser = await User.findOne({
+        email_user: newUser.email_user,
+      });
+      if (existingUser) {
+        return res.status(400).send("Email already exists");
+      } else {
+        await newUser.save();
+        return res.redirect("/v1/user/login"); // Chuyển hướng sau khi đăng ký thành công
+      }
+    } catch (error) {
+      return res.status(500).json(error);
+    }
+  },
 
   login: async (req, res) => {
     try {
-      const user = new User(req.body);
-      const checkUser = await User.findOne({email_user: user.email_user});
-      // const user = await User.find({email_user: req.body.email_user });
-      if (!checkUser) {
-        res.send("User not found")
+      const user = await User.findOne({ email_user: req.body.email_user });
+      const password = await User.findOne({
+        password_user: req.body.password_user,
+      });
+      if (!user) {
+        return res.status(404).json("User not found");
       }
-      res.status(200).json("login successful");
+      if (!password) {
+        return res.status(404).json("Password is not correct");
+      }
+      return res.redirect("/homepage");
     } catch (error) {
-      res.send("errr");
       res.status(500).json(error);
     }
   },
-  signup: async (req, res) => {
-    const newUser = new User(req.body)
-      const existingUser = await User.findOne({email_user: newUser.email_user});
-      if(existingUser){
-        res.send("email had exist");
 
-      }else{
-        const saveUser = await User.save();
-        res.send(saveUser );
-        res.send("register success")
-      }
-  },
-  
-  logout : async (req,res)=>{
+  logout: async (req, res) => {
     res.status(200).json("");
   },
 
@@ -38,18 +50,19 @@ const userController = {
       const users = await User.find();
       res.status(200).json(users);
     } catch (error) {
-      res.status(500).json(error); // Ensure the error variable is used correctly
+      res.status(500).json(error);
     }
   },
-  updateUser: async(req,res)=>{
+
+  updateUser: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
-      await user.updateOne({$set: req.body});
-      res.status(200).json("update successfully")
+      await user.updateOne({ $set: req.body });
+      res.status(200).json("Update successfully");
     } catch (error) {
       res.status(500).json(error);
     }
-  }
+  },
 };
 
 module.exports = userController;

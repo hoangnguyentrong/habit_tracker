@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Signup</title>
 </head>
 <body>
-  
+    <h1>User Signup</h1>
+    <form action="/v1/user/signup" method="POST">
+        <input type="text" name="name_user" id="name_user" placeholder="Enter your name" required>
+        <input type="email" name="email_user" id="email_user" placeholder="Enter your email" required>
+        <input type="password" name="password_user" id="password_user" placeholder="Enter your password" required>
+        <button type="submit">Sign Up</button>
+    </form>
 </body>
 </html>

@@ -21,10 +21,13 @@ const habitSchema = new mongoose.Schema({
     required: true,
     maxlength: 255
   },
-  email_user: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
-  },
+  email_user: [{
+    type: new mongoose.Schema({
+      _id: mongoose.Schema.Types.ObjectId,
+      email_user: String,
+      name_user: String,
+    }, { _id: false })
+  }],
   description: {
     type: String,
     required: true,
@@ -52,7 +55,6 @@ const habitSchema = new mongoose.Schema({
     type: Date
   }
 });
-
 const habitWeekDaySchema = new mongoose.Schema({
   habit_week_day_id: {
     type: Number,

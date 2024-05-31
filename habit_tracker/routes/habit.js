@@ -1,9 +1,7 @@
 const habitController = require("../controllers/habitController");
 
 const router = require("express").Router();
-router.get("/create", (req, res) => {
-  res.render("createHabit");
-});
+router.get("/create", habitController.createHabitPage);
 router.post("/create", habitController.createHabit);
 router.get("/", habitController.getAllHabit);
 router.put("/:id", habitController.updateHabit);

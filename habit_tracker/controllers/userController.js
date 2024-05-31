@@ -23,27 +23,34 @@ const userController = {
     }
   },
 
-  login: async (req, res) => {
-    try {
-      const user = await User.findOne({ email_user: req.body.email_user });
-      const password = await User.findOne({
-        password_user: req.body.password_user,
-      });
-      if (!user) {
-        return res.status(404).json("User not found");
-      }
-      if (!password) {
-        return res.status(404).json("Password is not correct");
-      }
-      return res.redirect("/homepage");
-    } catch (error) {
-      res.status(500).json(error);
-    }
-  },
+  loginPage: (req, res) => {
+    res.render('login');
+},
 
-  logout: async (req, res) => {
-    res.status(200).json("");
-  },
+login: async (req, res) => {
+    try {
+        const user = await User.findOne({ email_user: req.body.email_user });
+        if (!user || user.password_user !== req.body.password_user) {
+            return res.status(404).json("Email hoặc mật khẩu không đúng");
+        }
+
+        req.session.userId = user._id;
+        return res.redirect("/homepage");
+    } catch (error) {
+        console.error("Lỗi khi đăng nhập:", error);
+        res.status(500).json({ success: false, message: "Lỗi khi đăng nhập" });
+    }
+},
+
+
+  logout: (req, res) => {
+    req.session.destroy((err) => {
+        if (err) {
+            return res.status(500).json("Error logging out");
+        }
+        res.redirect("/v1/user/login");
+    });
+},
 
   getAllUser: async (req, res) => {
     try {

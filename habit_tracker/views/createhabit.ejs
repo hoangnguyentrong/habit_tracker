@@ -1,11 +1,10 @@
-<!-- views/homepage.ejs -->
-<!-- views/createHabit.ejs -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Create Habit</title>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
   <h1>Create a New Habit</h1>
@@ -23,7 +22,11 @@
     <input type="number" id="goal_target" name="goal_target" required><br>
 
     <label for="goal_period">Goal Period:</label>
-    <input type="text" id="goal_period" name="goal_period" required><br>
+    <select id="goal_period" name="goal_period" required>
+      <% goalPeriods.forEach(period => { %>
+        <option value="<%= period._id %>"><%= period.value %></option>
+      <% }); %>
+    </select><br>
 
     <label for="start_day">Start Day:</label>
     <input type="date" id="start_day" name="start_day" required><br>

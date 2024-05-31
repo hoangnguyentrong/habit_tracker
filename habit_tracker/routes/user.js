@@ -7,9 +7,7 @@ router.get("/signup", (req, res) => {
 });
 router.post("/signup", userController.signup);
 
-router.get("/login", (req, res) => {
-  res.render("login");
-});
+router.get("/login", userController.loginPage);
 router.post("/login", userController.login);
 
 router.get("/users", userController.getAllUser);

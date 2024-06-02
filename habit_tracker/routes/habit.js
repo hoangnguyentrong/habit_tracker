@@ -1,6 +1,7 @@
-const habitController = require("../controllers/habitController");
 
-const router = require("express").Router();
+const express = require("express");
+const router = express.Router();
+const habitController = require("../controllers/habitController");
 router.get("/create", habitController.createHabitPage);
 router.post("/create", habitController.createHabit);
 router.get("/", habitController.getAllHabit);

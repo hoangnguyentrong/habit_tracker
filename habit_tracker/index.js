@@ -9,7 +9,8 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/user");
 const habitRoute = require("./routes/habit");
-
+const homeRoute = require("./routes/home");
+const goalTargetRoute = require("./routes/goaltarget");
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URL, {
   // useNewUrlParser: true,
@@ -43,11 +44,11 @@ app.use(
 
 app.use("/v1/user", userRoute);
 app.use("/v1/habit", habitRoute);
+app.use("/v1/home", homeRoute);
+app.use("/v1/goal_target", goalTargetRoute);
 
 // Đây là route cho trang homepage
-app.get("/homepage", (req, res) => {
-  res.render("homepage");
-});
+
 
 app.listen(8000, () => {
   console.log("server is running");

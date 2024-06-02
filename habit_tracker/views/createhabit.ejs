@@ -16,6 +16,11 @@
       <input type="text" id="description" name="description" required /><br />
       <label for="type_habit">Habit Type:</label>
       <select id="type_habit" name="type_habit" required>
+        <% typeHabits.forEach(typeHabit => { %>
+          <option value="<%= typeHabit._id %>"><%= typeHabit.value %></option>
+        <% }); %>
+      </select>
+      <br />
         <% typeHabits.forEach(habittype => { %>
         <option value="<%= habittype._id %>"><%= habittype.value %></option>
         <% }); %></select
@@ -42,5 +47,6 @@
 
       <button type="submit">Create Habit</button>
     </form>
+    
   </body>
 </html>

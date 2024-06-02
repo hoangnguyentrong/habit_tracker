@@ -42,6 +42,11 @@ login: async (req, res) => {
 
         // Chuyển hướng đến trang homepage và truyền danh sách thói quen
         return res.render("homepage", { habits });
+        req.session.userMail = user.email_user;
+        return res.redirect("/v1/home")
+      
+       
+
     } catch (error) {
         console.error("Lỗi khi đăng nhập:", error);
         res.status(500).json({ success: false, message: "Lỗi khi đăng nhập" });

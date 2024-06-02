@@ -3,31 +3,30 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>Document</title>
 </head>
 <body>
-  <h1>Welcome to the Homepage</h1>
-  <p>You have successfully logged in!</p>
   <table>
     <thead>
       <th>Name</th>
-      <th>Description</th>
-      <th>Goal Type</th>
       <th>Goal Target</th>
+      <th>Unit</th>
       <th>Option</th>
     </thead>
     <tbody>
-      <% habits.forEach(habit => { %>
-        <tr>
-          <td><%= habit.name_habit %></td>
-          <td><%= habit.description %></td>
-          <td><%= habit.type_habit.value %></td> <!-- Truy xuất thông tin từ mô hình TypeHabit -->
-          <td><%= habit.goal_target %></td>
-          <td>edit</td>
-        </tr>
-      <% }); %>
+      <%habits.forEach(habit => {%>
+      <tr>
+        <td><%= habit.name_habit%></td>
+        <td><%= habit.goal_target%></td>
+        <td><%= habit.unit%></td>
+        <td>
+          <button onclick="window.location.href = '/v1/goal_target?habit_id=<%= habit._id.toString() %>'">Create Habit</button>
+        </td>
+      </tr>
+      <%});%>
     </tbody>
   </table>
   <button onclick="window.location.href = '/v1/habit/create'">Create Habit</button>
+
 </body>
 </html>

@@ -200,7 +200,7 @@ const completedHabitSchema = new mongoose.Schema({
 
 let User = mongoose.model("User", usersSchema);
 let GoalPeriod = mongoose.model("Period", GoalPeriodSchema);
-let TypeHabit = mongoose.model("HabitType", typeHabitSchema)
+let TypeHabit = mongoose.model("TypeHabit", typeHabitSchema);
 let Habit = mongoose.model("Habit", habitSchema);
 let HabitWeekDay = mongoose.model("HabitWeekDay", habitWeekDaySchema);
 let HabitWeekOccurrence = mongoose.model(

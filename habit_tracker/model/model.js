@@ -28,23 +28,39 @@ const GoalPeriodSchema = new mongoose.Schema({
     required: true,
   },
 });
+const typeHabitSchema = new mongoose.Schema({
+  value: {
+    type: String,
+    required : true,
+  },
+});
 const habitSchema = new mongoose.Schema({
   name_habit: {
     type: String,
     required: true,
     maxlength: 255,
   },
-  email_user: {
-    type: mongoose.Schema.Types.ObjectId,
-    required: true,
-    ref: "User", // Reference the User model
-  },
+  users: [
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+      userName: {
+        type: String,
+      }, // Reference the User model
+    },
+  ],
   description: {
     type: String,
     required: true,
     maxlength: 255,
   },
-  goal_type: {
+  type_habit:{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "TypeHabit"
+  },
+  unit: {
     type: String,
     required: true,
     maxlength: 50,
@@ -184,6 +200,7 @@ const completedHabitSchema = new mongoose.Schema({
 
 let User = mongoose.model("User", usersSchema);
 let GoalPeriod = mongoose.model("Period", GoalPeriodSchema);
+let TypeHabit = mongoose.model("HabitType", typeHabitSchema)
 let Habit = mongoose.model("Habit", habitSchema);
 let HabitWeekDay = mongoose.model("HabitWeekDay", habitWeekDaySchema);
 let HabitWeekOccurrence = mongoose.model(
@@ -201,6 +218,7 @@ let CompletedHabit = mongoose.model("CompletedHabit", completedHabitSchema);
 module.exports = {
   User,
   GoalPeriod,
+  TypeHabit,
   Habit,
   HabitWeekDay,
   HabitWeekOccurrence,

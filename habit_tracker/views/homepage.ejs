@@ -8,6 +8,26 @@
 <body>
   <h1>Welcome to the Homepage</h1>
   <p>You have successfully logged in!</p>
+  <table>
+    <thead>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Goal Type</th>
+      <th>Goal Target</th>
+      <th>Option</th>
+    </thead>
+    <tbody>
+      <% habits.forEach(habit => { %>
+        <tr>
+          <td><%= habit.name_habit %></td>
+          <td><%= habit.description %></td>
+          <td><%= habit.type_habit.value %></td> <!-- Truy xuất thông tin từ mô hình TypeHabit -->
+          <td><%= habit.goal_target %></td>
+          <td>edit</td>
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
   <button onclick="window.location.href = '/v1/habit/create'">Create Habit</button>
 </body>
 </html>

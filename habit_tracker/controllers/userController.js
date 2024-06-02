@@ -1,5 +1,5 @@
-const { User } = require("../model/model");
-
+const { User, Habit } = require("../model/model");
+// const habitController = require("./habitController");
 const userController = {
   signup: async (req, res) => {
     try {
@@ -35,7 +35,13 @@ login: async (req, res) => {
         }
 
         req.session.userId = user._id;
-        return res.redirect("/homepage");
+        req.session.userName = user.name_user;
+  
+        // Gọi hàm getAllHabit từ habitController với userId
+        const habits = await Habit.find({ "users.userId": user._id });
+
+        // Chuyển hướng đến trang homepage và truyền danh sách thói quen
+        return res.render("homepage", { habits });
     } catch (error) {
         console.error("Lỗi khi đăng nhập:", error);
         res.status(500).json({ success: false, message: "Lỗi khi đăng nhập" });

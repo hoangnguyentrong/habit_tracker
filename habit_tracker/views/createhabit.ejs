@@ -1,52 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create Habit</title>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  </head>
-  <body>
-    <h1>Create a New Habit</h1>
-    <form action="/v1/habit/create" method="POST">
-      <label for="name_habit">Habit Name:</label>
-      <input type="text" id="name_habit" name="name_habit" required /><br />
-
+<html>
+<head>
+  <title>Create Habit</title>
+</head>
+<body>
+  <h1>Create a New Habit</h1>
+  <form action="/v1/habit/create" method="POST">
+    <div>
+      <label for="name">Habit Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
       <label for="description">Description:</label>
-      <input type="text" id="description" name="description" required /><br />
-      <label for="type_habit">Habit Type:</label>
-      <select id="type_habit" name="type_habit" required>
-        <% typeHabits.forEach(typeHabit => { %>
-          <option value="<%= typeHabit._id %>"><%= typeHabit.value %></option>
+      <input type="text" id="description" name="description" required>
+    </div>
+    <div>
+      <label for="type">Type:</label>
+      <select id="type" name="type" required>
+        <% habitTypes.forEach(type => { %>
+          <option value="<%= type._id %>"><%= type.type %></option>
         <% }); %>
       </select>
-      <br />
-        <% typeHabits.forEach(habittype => { %>
-        <option value="<%= habittype._id %>"><%= habittype.value %></option>
-        <% }); %></select
-      ><br />
-
-      <label for="goal_target">Goal</label>
-      <input type="number" id="goal_target" name="goal_target" required /><br />
-
+    </div>
+    <div>
       <label for="unit">Unit:</label>
-      <input type="text" id="unit" name="unit" required /><br />
-
-      <label for="goal_period">Goal Period:</label>
-      <select id="goal_period" name="goal_period" required>
-        <% goalPeriods.forEach(period => { %>
-        <option value="<%= period._id %>"><%= period.value %></option>
-        <% }); %></select
-      ><br />
-
-      <label for="start_day">Start Day:</label>
-      <input type="date" id="start_day" name="start_day" required /><br />
-
-      <label for="end_day">End Day:</label>
-      <input type="date" id="end_day" name="end_day" /><br />
-
+      <input type="text" id="unit" name="unit" required>
+    </div>
+    <div>
+      <label for="goalTarget">Goal Target:</label>
+      <input type="number" id="goalTarget" name="goalTarget" required>
+    </div>
+    <div>
+      <label for="period">Period:</label>
+      <select id="period" name="period" required>
+        <% habitPeriods.forEach(period => { %>
+          <option value="<%= period._id %>"><%= period.period %></option>
+        <% }); %>
+      </select>
+    </div>
+    <div>
+      <label for="startDate">Start Date:</label>
+      <input type="date" id="startDate" name="startDate" required>
+    </div>
+    <div>
+      <label for="endDate">End Date (optional):</label>
+      <input type="date" id="endDate" name="endDate">
+    </div>
+   <!-- <div id="reminders">
+      <label>Reminders:</label>
+      <div>
+        <input type="text" name="reminders[0][label]" placeholder="Reminder Label" required>
+        <input type="time" name="reminders[0][time]" placeholder="Reminder Time">
+      </div>
+    </div> -->
+    <!-- <button type="button" onclick="addReminder()">Add another reminder</button> -->
       <button type="submit">Create Habit</button>
-    </form>
-    
-  </body>
+    </div>
+  </form>
+ <!-- <script>
+    console.log(habitPeriods);
+    let reminderIndex = 1;
+
+    function addReminder() {
+      const remindersDiv = document.getElementById('reminders');
+      const newReminderDiv = document.createElement('div');
+      newReminderDiv.innerHTML = `
+        <input type="text" name="reminders[${reminderIndex}][label]" placeholder="Reminder Label" required>
+        <input type="time" name="reminders[${reminderIndex}][time]" placeholder="Reminder Time">
+      `;
+      remindersDiv.appendChild(newReminderDiv);
+      reminderIndex++;
+    }
+  </script> -->
+ 
+</body>
+</html>
+
+  
+</body>
 </html>

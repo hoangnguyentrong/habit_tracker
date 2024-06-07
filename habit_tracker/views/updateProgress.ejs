@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Update Progress</title>
+</head>
+<body>
+  <h1>Update Progress for <%= habit.name %></h1>
+  <form action="/v1/habit/updateProgress?habit_id=<%= habit._id %>" method="POST">
+    <label for="progress">Progress:</label>
+    <input type="number" id="progress" name="progress" required>
+    <button type="submit">Update</button>
+</form>
+<form action="/v1/habit/deleteHabit/<%= habit._id %>" method="POST">
+  <button type="submit" onclick="return confirm('Are you sure you want to delete this habit?')">Delete Habit</button>
+</form>
+<button onclick="window.location.href = '/v1/habit/editHabit?habit_id=<%= habit._id %>'">Edit Habit</button>
+  <button onclick="window.location.href = '/v1/home'">Back to Home</button>
+</body>
+</html>

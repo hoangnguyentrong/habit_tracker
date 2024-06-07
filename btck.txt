@@ -72,3 +72,11 @@ FOREIGN KEY (habit_id) REFERENCES habits(habit_id)
 
 npm init 
 npm install express mongoose cors body-parser morgan dotenv
+
+Đây là một loại Server-Side Session cụ thể là Database Store
+bỏ render dùng regidect để chuyển trang viết một homeController mới
+tạo một occurence default mỗi khi create một habti mới const newOccurrence = {
+            date: new Date(), // Sử dụng ngày hiện tại
+            progress: 0, // Khởi tạo progress là 0
+            status: 'pending' // Trạng thái mặc định
+        };

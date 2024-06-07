@@ -41,9 +41,10 @@ login: async (req, res) => {
         const habits = await Habit.find({ "users.userId": user._id });
 
         // Chuyển hướng đến trang homepage và truyền danh sách thói quen
-        return res.render("homepage", { habits });
+        // return res.render("homepage", { habits });
         req.session.userMail = user.email_user;
         return res.redirect("/v1/home")
+        
       
        
 

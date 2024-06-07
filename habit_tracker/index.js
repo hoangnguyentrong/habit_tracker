@@ -9,8 +9,7 @@ const morgan = require("morgan");
 const dotenv = require("dotenv");
 const userRoute = require("./routes/user");
 const habitRoute = require("./routes/habit");
-const homeRoute = require("./routes/home");
-const goalTargetRoute = require("./routes/goaltarget");
+const homeRoute = require("./routes/home")
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URL, {
   // useNewUrlParser: true,
@@ -30,6 +29,7 @@ app.use((req, res, next) => {
 app.set("view engine", "ejs");
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("common"));
 app.use(
@@ -45,9 +45,10 @@ app.use(
 app.use("/v1/user", userRoute);
 app.use("/v1/habit", habitRoute);
 app.use("/v1/home", homeRoute);
-app.use("/v1/goal_target", goalTargetRoute);
 
-// Đây là route cho trang homepage
+
+
+
 
 
 app.listen(8000, () => {

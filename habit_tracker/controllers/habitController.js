@@ -138,6 +138,19 @@ const habitController = {
     }
   },
   
-
+  deleteHabit: async (req, res) => {
+    try {
+      const habitId = req.params.habit_id;
+      const deletedHabit = await Habit.findByIdAndDelete(habitId);
+      if (deletedHabit) {
+        return res.redirect("/v1/home");
+        // res.status(200).json("Deleted successfully!");
+      } else {
+        res.status(404).json("Habit not found!");
+      }
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
 };
 module.exports = habitController;

@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
-const usersSchema = new mongoose.Schema({
+// User Schema
+const userSchema = new mongoose.Schema({
   email_user: {
     type: String,
     required: true,
@@ -15,215 +16,130 @@ const usersSchema = new mongoose.Schema({
   },
   habits: [
     {
-      habitId: { type: mongoose.Schema.Types.ObjectId, ref: "Habit" },
+      habitId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Habit",
+      },
       habitName: {
         type: String,
+        required: true,
       },
     },
   ],
 });
-const GoalPeriodSchema = new mongoose.Schema({
-  value: {
+
+// Habit Schema
+// HabitType Schema
+const habitTypeSchema = new mongoose.Schema({
+  type: {
     type: String,
     required: true,
+    enum: ["Build", "Quit"],
   },
+  // type_name : {
+  //   type: String,
+  //   required : true,
+  // }
 });
-const typeHabitSchema = new mongoose.Schema({
-  value: {
+
+// HabitPeriod Schema
+const habitPeriodSchema = new mongoose.Schema({
+  period: {
     type: String,
-    required : true,
+    required: true,
+    enum: ["Day", "Week", "Month"],
   },
 });
+
+// Updated Habit Schema
 const habitSchema = new mongoose.Schema({
-  name_habit: {
+  name: {
     type: String,
     required: true,
     maxlength: 255,
   },
-  users: [
-    {
-      userId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",
-      },
-      userName: {
-        type: String,
-      }, // Reference the User model
-    },
-  ],
   description: {
     type: String,
     required: true,
     maxlength: 255,
   },
-  type_habit:{
+  type: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "TypeHabit"
+    ref: "HabitType",
+    required: true,
   },
   unit: {
     type: String,
     required: true,
     maxlength: 50,
   },
-  goal_target: {
+  goalTarget: {
     type: Number,
     required: true,
   },
-  goal_period: {
+  period: {
     type: mongoose.Schema.Types.ObjectId,
+    ref: "HabitPeriod",
     required: true,
-    ref: "GoalPeriod",
   },
-  start_day: {
+  startDate: {
     type: Date,
     required: true,
   },
-  end_day: {
+  endDate: {
     type: Date,
   },
+  reminders: [
+    {
+      label: {
+        type: String,
+        required: true,
+        maxlength: 255,
+      },
+      time: {
+        type: String,
+      },
+    },
+  ],
+  users: [
+    {
+      userId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: true,
+      },
+      userName: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
+  occurrences: [
+    {
+      date: {
+        type: Date,
+        required: true,
+      },
+      progress: {
+        type: Number,
+        required: true,
+      },
+      status: {
+        type: String,
+        required: true,
+        maxlength: 50,
+      },
+    },
+  ],
 });
-const habitWeekDaySchema = new mongoose.Schema({
-  habit_week_day_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  habit_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Habit",
-  },
-  day_of_week: {
-    type: Number,
-    required: true,
-  },
-});
-
-const habitWeekOccurrenceSchema = new mongoose.Schema({
-  habit_occurrence_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  habit_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Habit",
-  },
-  week_start_date: {
-    type: Date,
-    required: true,
-  },
-  day_of_week: {
-    type: Number,
-    required: true,
-  },
-});
-
-const habitMonthDaySchema = new mongoose.Schema({
-  habit_month_day_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  habit_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Habit",
-  },
-  day_of_month: {
-    type: Number,
-    required: true,
-  },
-});
-
-const habitMonthOccurrenceSchema = new mongoose.Schema({
-  habit_occurrence_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  habit_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Habit",
-  },
-  month_start_date: {
-    type: Date,
-    required: true,
-  },
-  day_of_month: {
-    type: Number,
-    required: true,
-  },
-});
-
-const reminderSchema = new mongoose.Schema({
-  reminder_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  label_habit: {
-    type: String,
-    required: true,
-    maxlength: 255,
-  },
-  habit_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Habit",
-  },
-  reminder_time: {
-    type: String, // using String for simplicity, could be Date or more complex time type
-  },
-});
-
-const completedHabitSchema = new mongoose.Schema({
-  completed_id: {
-    type: Number,
-    required: true,
-    unique: true,
-  },
-  habit_id: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Habit",
-  },
-  completion_date: {
-    type: Date,
-  },
-  progress: {
-    type: Number,
-    required: true,
-  },
-  complete_status: {
-    type: String,
-    required: true,
-    maxlength: 50,
-  },
-});
-
-let User = mongoose.model("User", usersSchema);
-let GoalPeriod = mongoose.model("Period", GoalPeriodSchema);
-let TypeHabit = mongoose.model("TypeHabit", typeHabitSchema);
-let Habit = mongoose.model("Habit", habitSchema);
-let HabitWeekDay = mongoose.model("HabitWeekDay", habitWeekDaySchema);
-let HabitWeekOccurrence = mongoose.model(
-  "HabitWeekOccurrence",
-  habitWeekOccurrenceSchema
-);
-let HabitMonthDay = mongoose.model("HabitMonthDay", habitMonthDaySchema);
-let HabitMonthOccurrence = mongoose.model(
-  "HabitMonthOccurrence",
-  habitMonthOccurrenceSchema
-);
-let Reminder = mongoose.model("Reminder", reminderSchema);
-let CompletedHabit = mongoose.model("CompletedHabit", completedHabitSchema);
+const User = mongoose.model("User", userSchema);
+const HabitType = mongoose.model("HabitType", habitTypeSchema);
+const HabitPeriod = mongoose.model("HabitPeriod", habitPeriodSchema);
+const Habit = mongoose.model("Habit", habitSchema);
 
 module.exports = {
   User,
-  GoalPeriod,
-  TypeHabit,
   Habit,
-  HabitWeekDay,
-  HabitWeekOccurrence,
-  HabitMonthDay,
-  HabitMonthOccurrence,
-  Reminder,
-  CompletedHabit,
+  HabitType,
+  HabitPeriod,
 };

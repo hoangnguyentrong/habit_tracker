@@ -1,5 +1,5 @@
 const {User,Habit,HabitPeriod,HabitType} = require("../model/model");
-const { updateProgress } = require("./goalController");
+
 
 const habitController = {
   createHabitPage: async (req, res) => {
@@ -86,7 +86,44 @@ const habitController = {
         return res.status(500).send('Đã xảy ra lỗi khi tìm kiếm habit.');
     }
   },
+  updateProgress : async(req,res)=>{
+    const habitId = req.query.habit_id;
 
+    const newProgress = req.body.progress;
+
+    try {
+        const habit = await Habit.findById(habitId);
+
+        if (!habit) {
+            return res.status(404).send('Habit không tồn tại.');
+        }
+
+        const currentDate = new Date();
+
+        let todayOccurrence = habit.occurrences.find(occurrence => {
+            return occurrence.date.toDateString() === currentDate.toDateString();
+        });
+
+        if (!todayOccurrence) {
+            todayOccurrence = {
+                date: currentDate,
+                progress: 0,
+                status: 'pending'
+            };
+            habit.occurrences.push(todayOccurrence);
+        }
+
+        todayOccurrence.progress = newProgress;
+        todayOccurrence.status = (newProgress >= habit.goalTarget) ? 'finish' : 'pending';
+
+        await habit.save();
+
+        // return res.status(200).send('Cập nhật progress thành công.');
+    } catch (error) {
+        console.error('Lỗi khi cập nhật progress:', error);
+        return res.status(500).send('Đã xảy ra lỗi khi cập nhật progress.');
+    }
+  },
 
   getAllHabit: async (userId) => {
     try {

@@ -10,7 +10,7 @@ const dotenv = require("dotenv");
 const userRoute = require("./routes/user");
 const habitRoute = require("./routes/habit");
 const homeRoute = require("./routes/home")
-
+const recordRoute = require("./routes/record");
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URL, {
   // useNewUrlParser: true,
@@ -46,7 +46,7 @@ app.use(
 app.use("/v1/user", userRoute);
 app.use("/v1/habit", habitRoute);
 app.use("/v1/home", homeRoute);
-
+app.use("/v1/record", recordRoute);
 
 
 

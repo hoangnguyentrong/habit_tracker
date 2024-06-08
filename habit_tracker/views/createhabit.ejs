@@ -46,32 +46,20 @@
       <label for="endDate">End Date (optional):</label>
       <input type="date" id="endDate" name="endDate">
     </div>
-   <!-- <div id="reminders">
-      <label>Reminders:</label>
-      <div>
-        <input type="text" name="reminders[0][label]" placeholder="Reminder Label" required>
-        <input type="time" name="reminders[0][time]" placeholder="Reminder Time">
-      </div>
-    </div> -->
-    <!-- <button type="button" onclick="addReminder()">Add another reminder</button> -->
+  
+    <button type="button" onclick="addReminder()">Add another reminder</button>
       <button type="submit">Create Habit</button>
     </div>
   </form>
- <!-- <script>
-    console.log(habitPeriods);
-    let reminderIndex = 1;
+ <script>
 
-    function addReminder() {
-      const remindersDiv = document.getElementById('reminders');
-      const newReminderDiv = document.createElement('div');
-      newReminderDiv.innerHTML = `
-        <input type="text" name="reminders[${reminderIndex}][label]" placeholder="Reminder Label" required>
-        <input type="time" name="reminders[${reminderIndex}][time]" placeholder="Reminder Time">
-      `;
-      remindersDiv.appendChild(newReminderDiv);
-      reminderIndex++;
-    }
-  </script> -->
+    document.addEventListener("DOMContentLoaded", function() {
+      const startDateInput = document.getElementById('startDate');
+      const today = new Date().toISOString().split('T')[0];
+      startDateInput.value = today;
+    });
+   
+  </script>
  
 </body>
 </html>

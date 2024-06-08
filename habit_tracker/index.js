@@ -10,6 +10,7 @@ const dotenv = require("dotenv");
 const userRoute = require("./routes/user");
 const habitRoute = require("./routes/habit");
 const homeRoute = require("./routes/home")
+
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URL, {
   // useNewUrlParser: true,

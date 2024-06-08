@@ -23,6 +23,7 @@ const habitController = {
           .status(401)
           .json({ success: false, message: "Không được phép" });
       }
+      
       const newOccurrence = {
         date: new Date(), // Sử dụng ngày hiện tại
         progress: 0, // Khởi tạo progress là 0
@@ -31,6 +32,7 @@ const habitController = {
 
       const newHabit = new Habit({
         ...req.body,
+      
         users: [{ userId: req.session.userId, userName: req.session.userName }],
         occurrences: [newOccurrence] // Thêm thông tin người dùng vào mảng users của habit
       });
@@ -157,7 +159,19 @@ const habitController = {
         return res.status(500).send('Đã xảy ra lỗi khi tìm kiếm habit.');
     }
   },
-
+  editHabit: async (req, res) => {
+    try {
+      const habitId = req.query.habit_id;
+      const habit = await Habit.findById(habitId);
+      if (!habit) {
+        return res.status(404).json("Habit not found");
+      }
+      await habit.updateOne({ $set: req.body });
+      res.status(200).json("update successfully");
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  },
   deleteHabit: async (req, res) => {
     try {
       const habitId = req.params.habit_id;

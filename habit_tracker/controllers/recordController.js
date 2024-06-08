@@ -7,8 +7,16 @@ const recordController = {
       return res.status(401).send('Unauthorized');
     }
       const habits = await Habit.find({'users.userId':userId});
-      // console.log(userId);
-      // console.log(habits);
+      habits.forEach(async habit => {
+        let numFinish = 0;
+        habit.occurrences.forEach(occurrence => {
+          if (occurrence.status === 'finish') {
+            numFinish++;
+          }
+        });
+        // Thêm thuộc tính numFinish vào mỗi thói quen
+        habit.numFinish = numFinish;
+      });
       res.render('recordPage',{habits});
     } catch (error) {
       console.error("Error fetching habits:", error);

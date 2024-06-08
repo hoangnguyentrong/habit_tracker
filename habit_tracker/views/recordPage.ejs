@@ -6,6 +6,16 @@
   <title>Document</title>
 </head>
 <body>
-  
+  <h1>Habit Records</h1>
+  <ul>
+    <% habits.forEach(habit => { %>
+      <li>
+        <h2><%= habit.name %></h2>
+        <p>Description: <%= habit.description %></p>
+        <p>Number of completions: <%= habit.numFinish %></p>
+      </li>
+    <% }) %>
+  </ul>
+  <button onclick="window.location.href = '/v1/home'">Back to Home</button>
 </body>
 </html>

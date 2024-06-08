@@ -89,13 +89,11 @@ const habitSchema = new mongoose.Schema({
   endDate: {
     type: Date,
   },
+  reminderLabel: {
+    type: String,
+  },
   reminders: [
     {
-      label: {
-        type: String,
-        required: true,
-        maxlength: 255,
-      },
       time: {
         type: String,
       },

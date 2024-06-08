@@ -8,11 +8,15 @@
 <body>
   <table>
     <thead>
-      <th>Name</th>
-      <th>Goal Target</th>
-      <th>Unit</th>
-      <th><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></th>
-      <th>Option</th>
+ 
+      <tr>
+        <th>Name</th>
+        <th>Goal Target</th>
+        <th>Unit</th>
+        <th><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></th>
+        <th>Option</th>
+      </tr>
+     
     </thead>
     <tbody>
       <%habits.forEach(habit => {%>
@@ -37,6 +41,6 @@
  
   <button onclick="window.location.href = '/v1/record'">Record Habit</button>
   <button onclick="window.location.href = '/v1/user/profile'">Profile</button>
-
+  
 </body>
 </html>

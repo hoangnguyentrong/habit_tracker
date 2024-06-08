@@ -44,8 +44,8 @@
       <label for="endDate">End Date:</label>
       <input type="date" id="endDate" name="endDate" value="<%= habit.endDate ? habit.endDate.toISOString().split('T')[0] : '' %>">
     </div>
-    <button type="submit">Save Changes</button>
-    <button type="button" onclick="window.location.href = '/v1/home'">Cancel</button>
+    <button type="submit" >Save Changes</button>
+    <!-- <button type="button" onclick="window.location.href = '/v1/home'" >Cancel</button> -->
   </form>
 </body>
 </html>

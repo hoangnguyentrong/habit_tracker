@@ -38,6 +38,10 @@
         <% }); %>
       </select>
     </div>
+    <div id="frequency-container">
+      <label for="frequency-text">Frequency:</label>
+      <span id="frequency-text" ></span>
+    </div>
     <div>
       <label for="startDate">Start Date:</label>
       <input type="date" id="startDate" name="startDate" required>
@@ -63,6 +67,35 @@
       const startDateInput = document.getElementById('startDate');
       const today = new Date().toISOString().split('T')[0];
       startDateInput.value = today;
+      const periodSelect = document.getElementById('period');
+    const goalTargetInput = document.getElementById('goalTarget');
+    const unitInput = document.getElementById('unit');
+    const frequencyText = document.getElementById('frequency-text');
+
+    function updateFrequencyText() {
+      const goalTarget = goalTargetInput.value;
+      const unit = unitInput.value;
+      const selectedPeriod = periodSelect.value;
+      let frequencyDescription = "";
+
+      // Tạo mô tả dựa trên dữ liệu mới từ người dùng
+      if (selectedPeriod === "<%= habitPeriods[0]._id %>") {
+        frequencyDescription = `Complete ${goalTarget} ${unit} each day`;
+      } else if (selectedPeriod === "<%= habitPeriods[1]._id %>") {
+        frequencyDescription = `Complete ${goalTarget} ${unit} in total on (Mon to Sun)`;
+      } else if (selectedPeriod === "<%= habitPeriods[2]._id %>") {
+        frequencyDescription = `Complete ${goalTarget} ${unit} in total from day 1 to day 31`;
+      }
+
+      frequencyText.textContent = frequencyDescription;
+    }
+
+    // Gọi hàm update khi trang tải hoàn tất và khi người dùng thay đổi các trường "goalTarget" và "unit"
+    updateFrequencyText();
+    periodSelect.addEventListener('change', updateFrequencyText);
+    goalTargetInput.addEventListener('input', updateFrequencyText);
+    unitInput.addEventListener('input', updateFrequencyText);
+     
     });
     function addReminder() {
       const container = document.getElementById('reminders-container');
@@ -70,8 +103,18 @@
       newReminder.classList.add('reminder');
       newReminder.innerHTML = '<input type="time" name="reminders[]" required>';
       container.appendChild(newReminder);
-    }
-
+    };
+  
+      
+      function addReminder() {
+        const container = document.getElementById('reminders-container');
+        const newReminder = document.createElement('div');
+        newReminder.classList.add('reminder');
+        newReminder.innerHTML = '<input type="time" name="reminders[]" required>';
+        container.appendChild(newReminder);
+      }
+    
+ 
   </script>
  
 </body>

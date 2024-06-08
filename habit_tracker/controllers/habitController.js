@@ -174,7 +174,8 @@ const habitController = {
         return res.status(404).json("Habit not found");
       }
       await habit.updateOne({ $set: req.body });
-      res.status(200).json("update successfully");
+      return res.redirect("/v1/home");
+      // res.status(200).json("update successfully");
     } catch (error) {
       res.status(500).json(error);
     }

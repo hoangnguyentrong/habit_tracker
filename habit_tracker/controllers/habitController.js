@@ -23,7 +23,14 @@ const habitController = {
           .status(401)
           .json({ success: false, message: "Không được phép" });
       }
-      
+      let reminders = [];
+      if (req.body.reminders) {
+        if (Array.isArray(req.body.reminders)) {
+          reminders = req.body.reminders.map(time => ({ time: time.toString() }));
+        } else {
+          reminders = [{ time: req.body.reminders.toString() }];
+        }
+      }
       const newOccurrence = {
         date: new Date(), // Sử dụng ngày hiện tại
         progress: 0, // Khởi tạo progress là 0
@@ -32,7 +39,7 @@ const habitController = {
 
       const newHabit = new Habit({
         ...req.body,
-      
+        reminders, 
         users: [{ userId: req.session.userId, userName: req.session.userName }],
         occurrences: [newOccurrence] // Thêm thông tin người dùng vào mảng users của habit
       });

@@ -47,6 +47,12 @@
       <input type="date" id="endDate" name="endDate">
     </div>
   
+    <div id="reminders-container">
+      <label>Reminders:</label>
+      <div class="reminder">
+        <input type="time" name="reminders[]" required>
+      </div>
+    </div>
     <button type="button" onclick="addReminder()">Add another reminder</button>
       <button type="submit">Create Habit</button>
     </div>
@@ -58,7 +64,14 @@
       const today = new Date().toISOString().split('T')[0];
       startDateInput.value = today;
     });
-   
+    function addReminder() {
+      const container = document.getElementById('reminders-container');
+      const newReminder = document.createElement('div');
+      newReminder.classList.add('reminder');
+      newReminder.innerHTML = '<input type="time" name="reminders[]" required>';
+      container.appendChild(newReminder);
+    }
+
   </script>
  
 </body>

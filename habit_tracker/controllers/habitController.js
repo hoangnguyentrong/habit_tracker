@@ -108,14 +108,15 @@ const habitController = {
         }
 
         const currentDate = new Date();
-
+        const localDate = new Date(currentDate.toLocaleString());
+        
         let todayOccurrence = habit.occurrences.find(occurrence => {
-            return occurrence.date.toDateString() === currentDate.toDateString();
+            return occurrence.date.toDateString() === localDate.toDateString();
         });
 
         if (!todayOccurrence) {
             todayOccurrence = {
-                date: currentDate,
+                date: localDate,
                 progress: 0,
                 status: 'pending'
             };
@@ -126,7 +127,12 @@ const habitController = {
         todayOccurrence.status = (newProgress >= habit.goalTarget) ? 'finish' : 'pending';
 
         await habit.save();
-
+        return res.send(`
+          <script>
+            window.location.href = window.location.href;
+          </script>
+        `);
+        // return res.redirect("/v1/habit/updateProgress")
         // return res.status(200).send('Cập nhật progress thành công.');
     } catch (error) {
         console.error('Lỗi khi cập nhật progress:', error);

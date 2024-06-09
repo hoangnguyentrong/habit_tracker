@@ -4,19 +4,95 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
+  <style>
+    #chartContainer {
+      width: 300px;  /* Đặt chiều rộng container */
+      height: 300px; /* Đặt chiều cao container */
+      margin: auto;  /* Căn giữa container */
+    }
+    canvas {
+      width: 100% !important;  /* Đảm bảo canvas chiếm toàn bộ diện tích container */
+      height: 100% !important; /* Đảm bảo canvas chiếm toàn bộ diện tích container */
+    }
+  </style>
 </head>
 <body>
-  <h1>Habit Records</h1>
+  <h1>Overall</h1>
+  <select id="habitSelect" onchange="viewHabit()">
+    <% habits.forEach(habit => { %>
+      <option value="/v1/record/recordDetailHabit?habit_id=<%= habit._id %>"><%= habit.name %></option>
+    <% }) %>
+  </select>
+  <div id="chartContainer">
+    <canvas id="habitChart"></canvas>
+  </div>
   <p>Total completions: <%= totalFinish %>/<%= totalHabits%></p>
   <ul>
     <% habits.forEach(habit => { %>
       <li>
         <h2><%= habit.name %></h2>
-        <p>Description: <%= habit.description %></p>
-        <p>Number of completions: <%= habit.numFinish %></p>
+        <button onclick="window.location.href = '/v1/record/recordDetailHabit?habit_id=<%= habit._id %>'">View Habit</button>
       </li>
     <% }) %>
   </ul>
+  <div id="data" data-total-finish="<%= totalFinish %>" data-total-habits="<%= totalHabits %>"></div>
   <button onclick="window.location.href = '/v1/home'">Back to Home</button>
+
+
+  <script>
+      function viewHabit() {
+    const select = document.getElementById('habitSelect');
+    const habitUrl = select.options[select.selectedIndex].value;
+    window.location.href = habitUrl;
+  }
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const dataDiv = document.getElementById('data');
+      const totalFinish = parseInt(dataDiv.getAttribute('data-total-finish'));
+      const totalHabits = parseInt(dataDiv.getAttribute('data-total-habits'));
+      const remainingHabits = totalHabits - totalFinish;
+      
+      const ctx = document.getElementById('habitChart').getContext('2d');
+
+      const data = {
+        labels: ['Thói quen hoàn thành', 'Thói quen chưa hoàn thành'],
+        datasets: [{
+          label: 'Hoàn Thành Thói Quen',
+          data: [totalFinish, remainingHabits],
+          backgroundColor: ['#36a2eb', '#ff6384'],
+          hoverBackgroundColor: ['#36a2eb', '#ff6384']
+        }]
+      };
+
+      const config = {
+        type: 'pie',
+        data: data,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'top',
+            },
+            title: {
+              display: true,
+              text: 'Biểu Đồ Hoàn Thành Thói Quen'
+            },
+            datalabels: {
+              formatter: (value, context) => {
+                const total = context.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                const percentage = (value / total * 100).toFixed(2) + '%';
+                return percentage;
+              },
+              color: '#fff',
+            }
+          }
+        },
+        plugins: [ChartDataLabels],
+      };
+
+      const habitChart = new Chart(ctx, config);
+    });
+  </script>
 </body>
 </html>

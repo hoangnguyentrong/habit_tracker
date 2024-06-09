@@ -5,5 +5,5 @@ const router = express.Router();
 
 
 router.get("/", recordController.renderRecordPage);
-
+router.get("/recordDetailHabit", recordController.renderRecordDetailPage);
 module.exports = router;

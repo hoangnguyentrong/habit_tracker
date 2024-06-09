@@ -12,13 +12,19 @@ const homeController ={
       const startOfDay = new Date(today.setHours(0, 0, 0, 0));
       const endOfDay = new Date(today.setHours(23, 59, 59, 999));
 
-      const filteredHabits = habits.map(habit => {
-        const filteredOccurrences = habit.occurrences.filter(occurrence => {
-          return occurrence.date >= startOfDay && occurrence.date <= endOfDay;
-        });
-
-        return { ...habit.toObject(), occurrences: filteredOccurrences };
-      }).filter(habit => habit.occurrences.length > 0);
+      const filteredHabits = habits.filter(habit => {
+        if(!habit.endDate || new Date(habit.endDate) >= startOfDay){
+          const filteredOccurrences = habit.occurrences.filter(occurrence => {
+            return occurrence.date >= startOfDay && occurrence.date <= endOfDay;
+          });
+          habit.occurrences = filteredOccurrences;
+          return true;
+        }
+      
+        return false
+        // return { ...habit.toObject(), occurrences: filteredOccurrences };
+      });
+      // .filter(habit => habit.occurrences.length > 0);
 
       res.render('homepage', { habits: filteredHabits });
       // console.log(userId);

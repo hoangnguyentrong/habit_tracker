@@ -28,6 +28,26 @@ const recordController = {
       res.status(500).json({ success: false, message: "Lỗi khi tải trang chủ" });
     }
   },
+  renderRecordDetailPage : async(req,res)=>{
+    const habitIdFromUrl = req.query.habit_id;
+
+    try {
+        // Tìm habit trong cơ sở dữ liệu dựa trên habitIdFromUrl
+        const habit = await Habit.findById(habitIdFromUrl);
+
+        if (habit) {
+            // Nếu tìm thấy habit trong cơ sở dữ liệu, render trang update progress
+            return res.render('recordDetailHabit', { habit });
+        } else {
+            // Nếu không tìm thấy habit, hiển thị lỗi hoặc redirect về trang khác
+            return res.status(404).send('Habit không tồn tại.');
+        }
+    } catch (error) {
+        // Xử lý lỗi nếu có
+        console.error('Lỗi khi tìm kiếm habit:', error);
+        return res.status(500).send('Đã xảy ra lỗi khi tìm kiếm habit.');
+    }
+  },
 }
 
 module.exports = recordController;

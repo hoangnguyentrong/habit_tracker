@@ -98,7 +98,7 @@ const habitController = {
   updateProgress : async(req,res)=>{
     const habitId = req.query.habit_id;
 
-    const newProgress = req.body.progress;
+    const progress = req.body.progress;
 
     try {
         const habit = await Habit.findById(habitId);
@@ -106,14 +106,17 @@ const habitController = {
         if (!habit) {
             return res.status(404).send('Habit không tồn tại.');
         }
+        // Tính tổng progress của tất cả các occurrences
+        let totalProgress = habit.occurrences.reduce((total, occurrence) => total + occurrence.progress, 0);
 
+        // Cộng thêm giá trị mới từ người dùng nhập
+        totalProgress += parseInt(progress);
         const currentDate = new Date();
         const localDate = new Date(currentDate.toLocaleString());
         
         let todayOccurrence = habit.occurrences.find(occurrence => {
             return occurrence.date.toDateString() === localDate.toDateString();
         });
-
         if (!todayOccurrence) {
             todayOccurrence = {
                 date: localDate,
@@ -123,8 +126,8 @@ const habitController = {
             habit.occurrences.push(todayOccurrence);
         }
 
-        todayOccurrence.progress = newProgress;
-        todayOccurrence.status = (newProgress >= habit.goalTarget) ? 'finish' : 'pending';
+        todayOccurrence.progress = totalProgress;
+        todayOccurrence.status = (totalProgress >= habit.goalTarget) ? 'finish' : 'pending';
 
         await habit.save();
         return res.send(`

@@ -7,6 +7,8 @@ router.get("/create", habitController.createHabitPage);
 router.post("/create", habitController.createHabit);
 router.get("/updateProgress", habitController.renderUpdateProgressPage);
 router.post("/updateProgress", habitController.updateProgress);
+router.post("/resetProgress", habitController.resetProgress);
+
 router.get("/", habitController.getAllHabit);
 router.get("/editHabit", habitController.renderEditHabitPage);
 router.post("/editHabit", habitController.editHabit);

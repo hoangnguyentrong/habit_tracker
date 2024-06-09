@@ -130,11 +130,50 @@ const habitController = {
         todayOccurrence.status = (totalProgress >= habit.goalTarget) ? 'finish' : 'pending';
 
         await habit.save();
-        return res.send(`
-          <script>
-            window.location.href = window.location.href;
-          </script>
-        `);
+        return res.redirect(`/v1/habit/updateProgress?habit_id=${habitId}`);
+        // return res.send(`
+        //   <script>
+        //     window.location.href = window.location.href;
+        //   </script>
+        // `);
+        // return res.redirect("/v1/habit/updateProgress")
+        // return res.status(200).send('Cập nhật progress thành công.');
+    } catch (error) {
+        console.error('Lỗi khi cập nhật progress:', error);
+        return res.status(500).send('Đã xảy ra lỗi khi cập nhật progress.');
+    }
+  },
+  resetProgress : async(req,res)=>{
+    const habitId = req.query.habit_id;
+    try {
+        const habit = await Habit.findById(habitId);
+
+        if (!habit) {
+            return res.status(404).send('Habit không tồn tại.');
+        }
+        // Lấy ngày hiện tại
+        const currentDate = new Date();
+        const localDate = new Date(currentDate.toLocaleString());
+         // Tìm occurrence cho ngày hiện tại
+        let todayOccurrence = habit.occurrences.find(occurrence => {
+            return occurrence.date.toDateString() === localDate.toDateString();
+        });
+        if (todayOccurrence) {
+  
+                // date: localDate,
+                todayOccurrence.progress= 0,
+                todayOccurrence.status= 'pending'
+            // habit.occurrences.push(todayOccurrence);
+        }
+
+
+        await habit.save();
+        // return res.send(`
+        //   <script>
+        //     window.location.href = window.location.href;
+        //   </script>
+        // `);
+        return res.redirect(`/v1/habit/updateProgress?habit_id=${habitId}`);
         // return res.redirect("/v1/habit/updateProgress")
         // return res.status(200).send('Cập nhật progress thành công.');
     } catch (error) {

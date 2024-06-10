@@ -30,13 +30,13 @@
 
 <body>
   <h1>Overall</h1>
-  <select id="habitSelect" onchange="viewHabit()">
+  <!-- <select id="habitSelect" onchange="viewHabit()">
     <% habits.forEach(habit=> { %>
       <option value="/v1/record/recordDetailHabit?habit_id=<%= habit._id %>">
         <%= habit.name %>
       </option>
       <% }) %>
-  </select>
+  </select> -->
   <div id="chartContainer">
     <canvas id="habitChart"></canvas>
   </div>

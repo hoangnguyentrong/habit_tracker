@@ -3,15 +3,24 @@ const { User, Habit } = require("../model/model");
 const userController = {
   signup: async (req, res) => {
     try {
+      const {name_user, email_user, password_user} = req.body;
+      if (!name_user || !email_user || !password_user) {
+        return res.status(400).send("Missing required fields");
+      }
+      if (password_user.length < 8) {
+        return res.status(400).send("Password must be at least 8 characters long");
+      }
+      const hashedPassword = await bcrypt.hash(password_user, 10);
       console.log("Request Body:", req.body);
       const newUser = new User({
-        name_user: req.body.name_user,
-        email_user: req.body.email_user,
-        password_user: req.body.password_user,
+        name_user: name_user,
+        email_user: email_user,
+        password_user: hashedPassword,
       });
       const existingUser = await User.findOne({
         email_user: newUser.email_user,
       });
+      
       if (existingUser) {
         return res.status(400).send("Email already exists");
       } else {
@@ -38,7 +47,7 @@ login: async (req, res) => {
         req.session.userName = user.name_user;
   
         // Gọi hàm getAllHabit từ habitController với userId
-        const habits = await Habit.find({ "users.userId": user._id });
+        // const habits = await Habit.find({ "users.userId": user._id });
 
         // Chuyển hướng đến trang homepage và truyền danh sách thói quen
         // return res.render("homepage", { habits });
@@ -78,7 +87,7 @@ logout: (req, res) => {
     });
 },
 
-  getAllUser: async (req, res) => {
+getAllUser: async (req, res) => {
     try {
       const users = await User.find();
       res.status(200).json(users);

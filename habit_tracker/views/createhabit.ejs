@@ -17,16 +17,6 @@
       <input type="text" id="description" name="description" required>
     </div>
     <div>
-      <label for="type">Type:</label>
-      <select id="type" name="type" required>
-        <% habitTypes.forEach(type=> { %>
-          <option value="<%= type._id %>">
-            <%= type.type %>
-          </option>
-          <% }); %>
-      </select>
-    </div>
-    <div>
       <label for="unit">Unit:</label>
       <input type="text" id="unit" name="unit" required>
     </div>
@@ -60,7 +50,7 @@
     <div id="reminders-container">
       <label>Reminders:</label>
       <div class="reminder">
-        <input type="time" name="reminders[]" required>
+        <input type="time" name="reminders[]">
       </div>
     </div>
     <button type="button" onclick="addReminder()">Add another reminder</button>

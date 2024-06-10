@@ -7,6 +7,7 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
+global.bcrypt = require('bcrypt');
 const userRoute = require("./routes/user");
 const habitRoute = require("./routes/habit");
 const homeRoute = require("./routes/home")
@@ -32,7 +33,9 @@ app.use(bodyParser.json({ limit: "50mb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
+
 app.use(morgan("common"));
+
 // Middleware để phục vụ các file tĩnh
 app.use(express.static('public'));
 app.use(

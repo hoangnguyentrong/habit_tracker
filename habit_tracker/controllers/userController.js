@@ -1,4 +1,5 @@
 const { User, Habit } = require("../model/model");
+const bcrypt = require('bcrypt');
 // const habitController = require("./habitController");
 const userController = {
   signup: async (req, res) => {

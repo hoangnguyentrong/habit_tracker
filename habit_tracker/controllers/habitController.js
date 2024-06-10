@@ -63,7 +63,6 @@ const habitController = {
         },
         { new: true }
       );
-
       console.log("Cập nhật người dùng với Habit mới:", userUpdateResult);
       // const habits = await Habit.find({ "users.userId": req.session.userId });
       // return res.render("homepage", { habits });
@@ -233,5 +232,6 @@ const habitController = {
       res.status(500).json(error);
     }
   },
+
 };
 module.exports = habitController;

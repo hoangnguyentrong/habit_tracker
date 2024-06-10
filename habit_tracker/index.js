@@ -7,11 +7,11 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const morgan = require("morgan");
 const dotenv = require("dotenv");
-global.bcrypt = require('bcrypt');
 const userRoute = require("./routes/user");
 const habitRoute = require("./routes/habit");
 const homeRoute = require("./routes/home")
 const recordRoute = require("./routes/record");
+const nodeMailer = require("nodemailer");
 dotenv.config();
 mongoose.connect(process.env.MONGODB_URL, {
   // useNewUrlParser: true,

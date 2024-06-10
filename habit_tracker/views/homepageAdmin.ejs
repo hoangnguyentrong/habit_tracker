@@ -21,6 +21,7 @@
     </thead>
     <tbody>
       <% users.forEach(function(user) { %>
+        <% if (user.rule_user !== 1) { %>
         <tr>
 
           <td><%= user.email_user %></td>
@@ -31,6 +32,7 @@
           </td>
           
         </tr>
+        <% } %>
       <% }); %>
     </tbody>
   </table>

@@ -46,11 +46,6 @@ const habitController = {
       const savedHabit = await newHabit.save();
 
       console.log("Tạo Habit thành công:", savedHabit);
-
-      // console.log("Tạo Habit thành công:", savedHabit);
-
-     
-      // Tìm người dùng và cập nhật mảng habits
       const userUpdateResult = await User.findByIdAndUpdate(
         req.session.userId,
         {
@@ -64,9 +59,6 @@ const habitController = {
         { new: true }
       );
       console.log("Cập nhật người dùng với Habit mới:", userUpdateResult);
-      // const habits = await Habit.find({ "users.userId": req.session.userId });
-      // return res.render("homepage", { habits });
-
       return res.redirect("/v1/home")
     } catch (error) {
       console.error("Lỗi khi tạo Habit:", error);

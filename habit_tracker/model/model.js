@@ -22,7 +22,7 @@
         },
         habitName: {
           type: String,
-          required: true,
+   
         },
       },
     ],
@@ -123,7 +123,6 @@
   // Middleware to handle habit deletion
 
   const User = mongoose.model("User", userSchema);
-
   const HabitPeriod = mongoose.model("HabitPeriod", habitPeriodSchema);
   const Habit = mongoose.model("Habit", habitSchema);
 

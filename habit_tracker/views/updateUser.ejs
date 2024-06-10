@@ -1,41 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="/css/homepage.css">
+  <link rel="stylesheet" href="/css/update_user.css">
 </head>
-<body>
-  <form action="/v1/user/updateUser/<%= user._id %>"" method="POST">
-    <div>
-      <label for="email_user">Email:</label>
-      <input type="email" id="email_user" name="email_user" value="<%= user.email_user %>" required>
-    </div>
-    <div>
-      <label for="name_user">Name:</label>
-      <input type="text" id="name_user" name="name_user" value="<%= user.name_user %>" required>
-    </div>
-    <div>
-      <label for="password_user">Password:</label>
-      <input type="password" id="password_user" name="password_user" value="<%= user.password_user %>" required>
-    </div>
-    <button type="submit">Update</button>
-  </form>
-  <form action="/v1/user/logout" method="POST">
 
-    <button type="submit">Logout</button>
-  </form>
+<body>
   <div class="menu">
     <div class="btn">
       <button onclick="window.location.href = '/v1/home'"><i class="fa-solid fa-house custom-size"></i></button>
       <button onclick="window.location.href = '/v1/habit/create'"><i class="fa-solid fa-plus custom-size"></i></button>
       <button onclick="window.location.href = '/v1/record'"><i class="fa-solid fa-file custom-size"></i></button>
-      <button onclick="window.location.href = '/v1/user/updateUser'"><i class="fa-solid fa-gear custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/user/updateUser'">
+        <i class="fa-solid fa-gear custom-size"></i>
+      </button>
 
     </div>
   </div>
+  <div class="wrapper">
+    <h1>Information</h1>
+    <form action="/v1/user/updateUser/<%= user._id %>"" method=" POST">
+      <div class="input-box">
+        <label for="email">Email:</label>
+        <input type="email" id="email_user" name="email_user" value="<%= user.email_user %>" required>
+      </div>
+      <div class="input-box">
+        <label for="name_user">User Name:</label>
+        <input type="text" id="name_user" name="name_user" value="<%= user.name_user %>" required>
+      </div>
+
+      <div class="input-box">
+        <label for="password_user">Password:</label>
+        <input type="password" id="password_user" name="password_user" value="<%= user.password_user %>" required>
+      </div>
+
+      <button type="submit">Update</button>
+    </form>
+    <form action="/v1/user/logout" method="POST">
+      <button type="button">Logout</button>
+    </form>
+  </div>
+
 </body>
 
 </html>

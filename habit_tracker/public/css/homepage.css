@@ -40,7 +40,7 @@
     background-color: #eaeaea;
   }
   
-  .menu button {
+   button {
     background-color: white;
     color: rgb(6, 6, 6);
     padding: 10px 20px;
@@ -51,20 +51,20 @@
     font-size: 16px;
   }
   
-  .menu button:hover {
+   button:hover {
     background-color: #ff6384;
     color: white;
   }
   
-  .menu button:active {
+   button:active {
     background-color: #e82044;
     color: white;
   }
   
-  .menu button:focus {
+   button:focus {
     outline: none;
   }
-  .menu .btn{
+ .menu .btn{
     background-color: white;
     position: fixed;
     top: 0pc;

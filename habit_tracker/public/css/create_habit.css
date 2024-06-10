@@ -22,27 +22,23 @@ body{
     max-width: 100%;
 }
 
-/* Định dạng tiêu đề chính */
 h1 {
     text-align: center;
     margin-bottom: 20px;
 }
 
-/* Định dạng các input box */
 .input-box {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
 }
 
-/* Định dạng các label */
 .input-box label {
     flex: 1;
     margin-right: 10px;
     font-weight: bold;
 }
 
-/* Định dạng các input và select */
 .input-box input,
 .input-box select {
     flex: 2;
@@ -51,17 +47,14 @@ h1 {
     border-radius: 4px;
 }
 
-/* Định dạng cho khung chứa reminders */
 #reminders-container {
     margin-bottom: 15px;
 }
 
-/* Định dạng cho các reminders */
 .reminder {
     margin-bottom: 10px;
 }
 
-/* Định dạng cho các nút bấm */
 button {
     width: 10pc;
     height: 3pc;
@@ -74,18 +67,15 @@ button {
     font-size: 16px;
 }
 
-/* Đổi màu nền nút bấm khi hover */
 button:hover {
     background-color: #0056b3;
 }
 
-/* Định dạng cho nút "Add another reminder" */
 button[type="button"] {
     background-color: #e82044;
     margin-bottom: 10px;
 }
 
-/* Đổi màu nền nút "Add another reminder" khi hover */
 button[type="button"]:hover {
     background-color: #fa0431;
 }

@@ -5,9 +5,8 @@ const habitController = {
   createHabitPage: async (req, res) => {
     try {
       const habitPeriods = await HabitPeriod.find();
-      const habitTypes = await HabitType.find();
       console.log(habitPeriods);
-      return res.render("createHabit",{habitPeriods,habitTypes});
+      return res.render("createHabit",{habitPeriods});
 
     } catch (error) {
       console.error("Lỗi khi tải trang tạo Habit:", error);
@@ -131,13 +130,6 @@ const habitController = {
 
         await habit.save();
         return res.redirect(`/v1/habit/updateProgress?habit_id=${habitId}`);
-        // return res.send(`
-        //   <script>
-        //     window.location.href = window.location.href;
-        //   </script>
-        // `);
-        // return res.redirect("/v1/habit/updateProgress")
-        // return res.status(200).send('Cập nhật progress thành công.');
     } catch (error) {
         console.error('Lỗi khi cập nhật progress:', error);
         return res.status(500).send('Đã xảy ra lỗi khi cập nhật progress.');

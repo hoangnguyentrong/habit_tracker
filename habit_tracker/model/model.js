@@ -34,18 +34,7 @@ const userSchema = new mongoose.Schema({
 });
 
 // Habit Schema
-// HabitType Schema
-const habitTypeSchema = new mongoose.Schema({
-  type: {
-    type: String,
-    required: true,
-    enum: ["Build", "Quit"],
-  },
-  // type_name : {
-  //   type: String,
-  //   required : true,
-  // }
-});
+
 
 // HabitPeriod Schema
 const habitPeriodSchema = new mongoose.Schema({
@@ -67,11 +56,6 @@ const habitSchema = new mongoose.Schema({
     type: String,
     required: true,
     maxlength: 255,
-  },
-  type: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "HabitType",
-    required: true,
   },
   unit: {
     type: String,
@@ -136,13 +120,12 @@ const habitSchema = new mongoose.Schema({
   ],
 });
 const User = mongoose.model("User", userSchema);
-const HabitType = mongoose.model("HabitType", habitTypeSchema);
+
 const HabitPeriod = mongoose.model("HabitPeriod", habitPeriodSchema);
 const Habit = mongoose.model("Habit", habitSchema);
 
 module.exports = {
   User,
   Habit,
-  HabitType,
   HabitPeriod,
 };

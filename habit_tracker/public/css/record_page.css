@@ -7,12 +7,19 @@
     /* Căn giữa container */
   }
 
+
   canvas {
     width: 100% !important;
     /* Đảm bảo canvas chiếm toàn bộ diện tích container */
     height: 100% !important;
     /* Đảm bảo canvas chiếm toàn bộ diện tích container */
   }
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
 
   h1 {
     text-align: center;

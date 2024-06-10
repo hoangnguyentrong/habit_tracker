@@ -61,16 +61,16 @@ h1 {
 
 }
 
-button:hover {
+.wrapper button:hover {
     background-color: #0056b3;
 }
 
-button[type="button"] {
+.logout button {
     background-color: #ff6384;
     margin-bottom: 10px;
 }
 
-button[type="button"]:hover {
+.logout button:hover {
     background-color: #e42145;
 }
 

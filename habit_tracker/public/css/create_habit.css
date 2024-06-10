@@ -63,7 +63,7 @@ h1 {
     font-size: 16px;
 }
 
- button:hover {
+button[type="submit"]:hover {
     background-color: #0056b3;
 }
 

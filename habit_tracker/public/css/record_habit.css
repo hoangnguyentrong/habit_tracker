@@ -13,7 +13,12 @@
     height: 100% !important;
     /* Đảm bảo canvas chiếm toàn bộ diện tích container */
   }
-
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
   .info-box {
     display: flex;
     justify-content: center;

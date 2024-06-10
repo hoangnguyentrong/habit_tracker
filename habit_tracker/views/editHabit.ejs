@@ -1,51 +1,115 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
+  <style>
+    body {
+      font-family: "Poppins";
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .form-group {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    label {
+      width: 30%;
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="date"],
+    textarea {
+      width: 70%;
+      padding: 1pc;
+      border: 1px solid #ddd;
+      border-radius: 1pc;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      height: 5pc;
+    }
+
+    button {
+      background-color: #ff6384;
+      color: rgb(255, 242, 242);
+      padding: 10px 20px;
+      margin: 10px auto;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      box-shadow: 1px 1px 1px 1px rgb(181, 177, 177);
+      display: flex;
+    }
+
+    button:hover {
+      background-color: #e82044;
+    }
+  </style>
 </head>
+
 <body>
   <form action="/v1/habit/editHabit?habit_id=<%= habit._id %>" method="POST">
-    <div>
+    <div class="form-group">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" value="<%= habit.name %>" required maxlength="255">
     </div>
-    <div>
+    <div class="form-group">
       <label for="description">Description:</label>
       <textarea id="description" name="description" required maxlength="255"><%= habit.description %></textarea>
     </div>
-    
-    <div>
-      <label for="type">Type:</label>
-      <input type="text" id="type" name="type" value="<%= habit.type %>" required>
-    </div>
-    
-    <div>
+
+    <div class="form-group">
       <label for="unit">Unit:</label>
       <input type="text" id="unit" name="unit" value="<%= habit.unit %>" required maxlength="50">
     </div>
-    
-    <div>
+
+    <div class="form-group">
       <label for="goalTarget">Goal Target:</label>
       <input type="number" id="goalTarget" name="goalTarget" value="<%= habit.goalTarget %>" required>
     </div>
-    
-    <div>
+
+    <div class="form-group">
       <label for="period">Period:</label>
       <input type="text" id="period" name="period" value="<%= habit.period %>" required>
     </div>
-    <div>
+    <div class="form-group">
       <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate" name="startDate" value="<%= habit.startDate.toISOString().split('T')[0] %>" required>
+      <input type="date" id="startDate" name="startDate" value="<%= habit.startDate.toISOString().split('T')[0] %>"
+        required>
     </div>
-    
-    <div>
+
+    <div class="form-group">
       <label for="endDate">End Date:</label>
-      <input type="date" id="endDate" name="endDate" value="<%= habit.endDate ? habit.endDate.toISOString().split('T')[0] : '' %>">
+      <input type="date" id="endDate" name="endDate"
+        value="<%= habit.endDate ? habit.endDate.toISOString().split('T')[0] : '' %>">
     </div>
-    <button type="submit" >Save Changes</button>
+    <button type="submit">Save Changes</button>
     <!-- <button type="button" onclick="window.location.href = '/v1/home'" >Cancel</button> -->
   </form>
 </body>
+
 </html>

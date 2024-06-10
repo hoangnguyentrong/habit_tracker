@@ -1,0 +1,84 @@
+#updateProgressForm {
+    display: none;
+  }
+  *{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+
+  h1 {
+    text-align: center;
+  }
+
+  .custom-size {
+    font-size: 1.4pc;
+  }
+
+  .value {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: 1pc;
+  }
+
+  .reset {
+    margin: 0 0.6pc;
+  }
+
+  .delete {
+    position: fixed;
+    right: 1pc;
+  }
+
+  .update {
+    position: fixed;
+    right: 5.5pc;
+  }
+
+  .back {
+    position: fixed;
+    left: 1pc;
+    top: 0.6pc;
+  }
+
+  button {
+    background-color: white;
+    color: rgb(6, 6, 6);
+    padding: 10px 20px;
+    margin: 10px 0;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 1px 1px 1px 1px rgb(181, 177, 177);
+
+  }
+
+  button:hover {
+    background-color: #ff6384;
+    color: white;
+  }
+
+  button:active {
+    background-color: #e82044;
+    color: white;
+  }
+
+  button:focus {
+    outline: none;
+  }
+
+  label {
+    flex: 1;
+    margin-right: 10px;
+    font-weight: bold;
+  }
+
+  input {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }

@@ -6,10 +6,17 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <title>Update Progress</title>
+    <style>
+      #updateProgressForm {
+        display: none; /* Ẩn form ban đầu */
+      }
+    </style>
   </head>
   <body>
     <h1>Update Progress for <%= habit.name %></h1>
-    <form
+    <button onclick="toggleUpdateProgressForm()">Value</button>
+    <div id="updateProgressForm">
+      <form
       action="/v1/habit/updateProgress?habit_id=<%= habit._id %>"
       method="POST">
       <label for="progress">Progress:</label>
@@ -17,6 +24,8 @@
       <input type="hidden" id="habitId" name="habitId" value="<%= habit._id %>">
       <button type="submit">Submit</button>
     </form>
+    </div>
+ 
     <form action="/v1/habit/resetProgress?habit_id=<%= habit._id %>" method="POST">
       <button type="submit" onclick="return confirm('Are you sure you want to reset today\'s progress?')">Reset Progress</button>
     </form>
@@ -37,4 +46,14 @@
     <button onclick="window.location.href = '/v1/home'">Back to Home</button>
  
   </body>
+  <script>
+    function toggleUpdateProgressForm() {
+        var form = document.getElementById('updateProgressForm');
+        if (form.style.display === 'none' || form.style.display === '') {
+          form.style.display = 'block';
+        } else {
+          form.style.display = 'none';
+        }
+      }
+  </script>
 </html>

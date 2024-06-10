@@ -49,6 +49,7 @@
         <% 
         let lengthOccurences = habit.occurrences.length;
         %>
+        
         <div>Total Target: <%= lengthOccurences * habit.goalTarget%></div>
         <div>Total Occurrences: <%= habit.occurrences.length %></div>
         <div>Total Progress : <%= totalProgress%></div>
@@ -57,7 +58,7 @@
       
     </tr>
     <tr>
-      <td>Number of Finishs</td>
+      <td>Number of Finishs:</td>
       <td><%= numFinish %></td>
     </tr>
   </table>

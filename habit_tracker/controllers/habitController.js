@@ -173,7 +173,6 @@ const habitController = {
         return res.status(500).send('Đã xảy ra lỗi khi cập nhật progress.');
     }
   },
-
   getAllHabit: async (userId) => {
     try {
       if (!userId) {

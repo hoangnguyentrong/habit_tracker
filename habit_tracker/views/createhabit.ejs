@@ -22,16 +22,6 @@
             <input type="text" id="description" name="description" required>
           </div>
           <div class="input-box">
-            <label for="type">Type:</label>
-            <select id="type" name="type" required>
-              <% habitTypes.forEach(type=> { %>
-                <option value="<%= type._id %>">
-                  <%= type.type %>
-                </option>
-                <% }); %>
-            </select>
-          </div>
-          <div class="input-box">
             <label for="unit">Unit:</label>
             <input type="text" id="unit" name="unit" required>
           </div>

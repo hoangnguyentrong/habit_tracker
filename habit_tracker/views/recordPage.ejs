@@ -30,13 +30,6 @@
 
 <body>
   <h1>Overall</h1>
-  <!-- <select id="habitSelect" onchange="viewHabit()">
-    <% habits.forEach(habit=> { %>
-      <option value="/v1/record/recordDetailHabit?habit_id=<%= habit._id %>">
-        <%= habit.name %>
-      </option>
-      <% }) %>
-  </select> -->
   <div id="chartContainer">
     <canvas id="habitChart"></canvas>
   </div>
@@ -56,14 +49,14 @@
   <div id="data" data-total-finish="<%= totalFinish %>" data-total-habits="<%= totalHabits %>"></div>
   <button onclick="window.location.href = '/v1/home'">Back to Home</button>
 
-  <div class="menu">
+  <!-- <div class="menu">
     <div class="btn">
       <button onclick="window.location.href = '/v1/home'"><i class="fa-solid fa-house custom-size"></i></button>
       <button onclick="window.location.href = '/v1/habit/create'"><i class="fa-solid fa-plus custom-size"></i></button>
       <button onclick="window.location.href = '/v1/record'"><i class="fa-solid fa-file custom-size"></i></button>
       <button onclick="window.location.href = '/v1/user/profile'"><i class="fa-solid fa-gear custom-size"></i></button>
 
-    </div>
+    </div> -->
   </div>
   <script>
     function viewHabit() {
@@ -80,9 +73,9 @@
       const ctx = document.getElementById('habitChart').getContext('2d');
 
       const data = {
-        labels: ['Thói quen hoàn thành', 'Thói quen chưa hoàn thành'],
+        labels: ['Completed Habit', 'Incomplete Habit'],
         datasets: [{
-          label: 'Hoàn Thành Thói Quen',
+          label: 'Habit Completion',
           data: [totalFinish, remainingHabits],
           backgroundColor: ['#36a2eb', '#ff6384'],
           hoverBackgroundColor: ['#36a2eb', '#ff6384']

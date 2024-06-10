@@ -69,7 +69,7 @@ renderProfilePage: async(req,res)=>{
     res.status(500).json({ success: false, message: "Lỗi khi tải trang chủ" });
   }
 },
-  logout: (req, res) => {
+logout: (req, res) => {
     req.session.destroy((err) => {
         if (err) {
             return res.status(500).json("Error logging out");
@@ -86,12 +86,27 @@ renderProfilePage: async(req,res)=>{
       res.status(500).json(error);
     }
   },
-
+ renderUpdatePage: async(req,res)=>{
+  try {
+    const userId = req.session.userId;
+    if(!userId){
+      return res.status(401).send('Unauthorized');
+    }
+      // console.log(userId);
+      // console.log(habits);
+      const user = await User.findById(userId).lean();
+      res.render('updateUser', {user});
+    } catch (error) {
+      console.error("Error fetching habits:", error);
+      res.status(500).json({ success: false, message: "Lỗi khi tải trang chủ" });
+    }
+ },
   updateUser: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
       await user.updateOne({ $set: req.body });
-      res.status(200).json("Update successfully");
+      return res.redirect("/v1/home");
+      // res.status(200).json("Update successfully");
     } catch (error) {
       res.status(500).json(error);
     }

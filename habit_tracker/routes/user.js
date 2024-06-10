@@ -12,7 +12,7 @@ router.post("/login", userController.login);
 router.get("/users", userController.getAllUser);
 router.get("/profile", userController.renderProfilePage);
 router.post("/logout", userController.logout);
-router.get("/user/:id/update", userController.updateUser);
-router.post("/user/:id", userController.updateUser);
+router.get("/updateUser", userController.renderUpdatePage);
+router.post("/updateUser/:id", userController.updateUser);
 
 module.exports = router;

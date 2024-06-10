@@ -3,7 +3,8 @@ const homeController ={
   showHomePage: async(req,res)=>{
     try {
     const userId = req.session.userId;
-   
+    const dateParam = req.query.date;
+    const selectedDate = dateParam ? new Date(dateParam) : new Date();
     if(!userId){
       return res.status(401).send('Unauthorized');
     }
@@ -20,12 +21,21 @@ const homeController ={
     return res.render('homepageAdmin', { users });
   }
       const habits = await Habit.find({'users.userId':userId});
-      const today = new Date();
-      const startOfDay = new Date(today.setHours(0, 0, 0, 0));
-      const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+      // const today = new Date();
+      // const startOfDay = new Date(today.setHours(0, 0, 0, 0));
+      // const endOfDay = new Date(today.setHours(23, 59, 59, 999));
+      const startOfDay = new Date(selectedDate.setHours(0, 0, 0, 0));
+      const endOfDay = new Date(selectedDate.setHours(23, 59, 59, 999));
 
       const filteredHabits = habits.filter(habit => {
-        if(!habit.endDate || new Date(habit.endDate) >= startOfDay){
+        // if(!habit.endDate || new Date(habit.endDate) >= startOfDay){
+        //   const filteredOccurrences = habit.occurrences.filter(occurrence => {
+        //     return occurrence.date >= startOfDay && occurrence.date <= endOfDay;
+        //   });
+        //   habit.occurrences = filteredOccurrences;
+        //   return true;
+        // }
+        if (habit.startDate <= endOfDay && (!habit.endDate || new Date(habit.endDate) >= startOfDay)) {
           const filteredOccurrences = habit.occurrences.filter(occurrence => {
             return occurrence.date >= startOfDay && occurrence.date <= endOfDay;
           });
@@ -34,7 +44,7 @@ const homeController ={
         }
         return false
       });
-      res.render('homepage', { habits: filteredHabits });
+      res.render('homepage', { habits: filteredHabits ,selectedDate});
     } catch (error) {
       console.error("Error fetching habits:", error);
       res.status(500).json({ success: false, message: "Lỗi khi tải trang chủ" });

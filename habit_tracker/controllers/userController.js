@@ -2,7 +2,7 @@ const { User, Habit } = require("../model/model");
 const bcrypt = require('bcrypt');
 // const habitController = require("./habitController");
 const userController = {
-  signup: async (req, res) => {
+signup: async (req, res) => {
     try {
       const {name_user, email_user, password_user} = req.body;
       if (!name_user || !email_user || !password_user) {
@@ -33,7 +33,7 @@ const userController = {
     }
   },
 
-  loginPage: (req, res) => {
+loginPage: (req, res) => {
     res.render('login');
 },
 
@@ -111,7 +111,7 @@ getAllUser: async (req, res) => {
       res.status(500).json({ success: false, message: "Lỗi khi tải trang chủ" });
     }
  },
-  updateUser: async (req, res) => {
+updateUser: async (req, res) => {
     try {
       const user = await User.findById(req.params.id);
       await user.updateOne({ $set: req.body });

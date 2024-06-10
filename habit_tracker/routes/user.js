@@ -10,7 +10,6 @@ router.post("/signup", userController.signup);
 router.get("/login", userController.loginPage);
 router.post("/login", userController.login);
 router.get("/users", userController.getAllUser);
-router.get("/profile", userController.renderProfilePage);
 router.post("/logout", userController.logout);
 router.get("/updateUser", userController.renderUpdatePage);
 router.post("/updateUser/:id", userController.updateUser);

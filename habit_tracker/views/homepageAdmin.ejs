@@ -1,13 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <title>Admin Homepage</title>
   <link rel="stylesheet" href="/path/to/your/css/styles.css">
+  <style>
+    /* Đặt một kiểu font cho toàn bộ trang */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+    }
+
+
+    /* Định dạng tiêu đề phụ */
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      background-color: #fff;
+    }
+
+    table button {
+      box-shadow: 1px 1px 1px 1px rgb(181, 177, 177);
+
+    }
+
+    th,
+    td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+
+    tr:hover {
+      background-color: #eaeaea;
+    }
+
+    /* Định dạng cho nút bấm */
+    button {
+      background-color: white;
+      color: rgb(6, 6, 6);
+      padding: 10px 20px;
+      margin: 10px 0;
+      border: none;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+      box-shadow: 1px 1px 1px 1px rgb(201, 192, 192);
+    }
+
+    /* Đổi màu nền nút bấm khi hover */
+    button:hover {
+      background-color: #ff6384;
+      color: white;
+    }
+
+    .menu button:active {
+      background-color: #e82044;
+      color: white;
+    }
+
+    button:focus {
+      outline: none;
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Admin Homepage</h1>
   <h2>List of Users</h2>
   <table>
     <thead>
@@ -24,21 +105,29 @@
         <% if (user.rule_user !== 1) { %>
         <tr>
 
-          <td><%= user.email_user %></td>
-          <td><%= user.name_user %></td>
-          <td><%= user.rule_user === 1 ? 'Admin' : 'User' %></td>
           <td>
-            <button onclick="window.location.href = '/v1/home/userDetail?userId=<%= user._id %>'">Update Progress</button>
+            <%= user.email_user %>
           </td>
-          
+          <td>
+            <%= user.name_user %>
+          </td>
+          <td>
+            <%= user.rule_user===1 ? 'Admin' : 'User' %>
+          </td>
+          <td>
+            <button onclick="window.location.href = '/v1/home/userDetail?userId=<%= user._id %>'">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
+          </td>
+
         </tr>
-        <% } %>
-      <% }); %>
+        <% }); %>
     </tbody>
   </table>
   <form action="/v1/user/logout" method="POST">
-   
+
     <button type="submit">Logout</button>
-</form>
+  </form>
 </body>
+
 </html>

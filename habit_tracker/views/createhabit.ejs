@@ -4,72 +4,84 @@
 <head>
   <title>Create Habit</title>
   <link rel="stylesheet" href="/css/create_habit.css">
+  <link rel="stylesheet" href="/css/homepage.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 
 </head>
 
 <body>
-  <div class="wrapper">
-    <h1>Create a New Habit</h1>
-    <form action="/v1/habit/create" method="POST">
-      <div class="form">
-        <div>
-          <div class="input-box">
-            <label for="name">Habit Name:</label>
-            <input type="text" id="name" name="name" required>
-          </div>
-          <div class="input-box">
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description" required>
-          </div>
-          <div class="input-box">
-            <label for="unit">Unit:</label>
-            <input type="text" id="unit" name="unit" required>
-          </div>
-          <div class="input-box">
-            <label for="goalTarget">Goal Target:</label>
-            <input type="number" id="goalTarget" name="goalTarget" required>
-          </div>
-        </div>
-        <div>
-          <div class="input-box">
-            <label for="period">Period:</label>
-            <select id="period" name="period" required>
-              <% habitPeriods.forEach(period=> { %>
-                <option value="<%= period._id %>">
-                  <%= period.period %>
-                </option>
-                <% }); %>
-            </select>
-          </div>
-          <div class="input-box" id="frequency-container">
-            <label for="frequency-text">Frequency:</label>
-            <span id="frequency-text"></span>
-          </div>
-          <div class="input-box">
-            <label for="startDate">Start Date:</label>
-            <input type="date" id="startDate" name="startDate" required>
-          </div>
-          <div class="input-box">
-            <label for="endDate">End Date (optional):</label>
-            <input type="date" id="endDate" name="endDate">
-          </div>
+  <div class="menu">
+    <div class="btn">
+      <button onclick="window.location.href = '/v1/home'"><i class="fa-solid fa-house custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/habit/create'"><i class="fa-solid fa-plus custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/record'"><i class="fa-solid fa-file custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/user/profile'"><i class="fa-solid fa-gear custom-size"></i></button>
 
-          <div class="input-box" id="reminders-container">
-            <label>Reminders:</label>
-            <div class="reminder">
-              <input type="time" name="reminders[]" required>
+    </div>
+  </div>
+  <div class="body">
+    <div class="wrapper">
+      <h1>Create a New Habit</h1>
+      <form action="/v1/habit/create" method="POST">
+        <div class="form">
+          <div>
+            <div class="input-box">
+              <label for="name">Habit Name:</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="input-box">
+              <label for="description">Description:</label>
+              <input type="text" id="description" name="description" required>
+            </div>
+            <div class="input-box">
+              <label for="unit">Unit:</label>
+              <input type="text" id="unit" name="unit" required>
+            </div>
+            <div class="input-box">
+              <label for="goalTarget">Goal Target:</label>
+              <input type="number" id="goalTarget" name="goalTarget" required>
+            </div>
+          </div>
+          <div>
+            <div class="input-box">
+              <label for="period">Period:</label>
+              <select id="period" name="period" required>
+                <% habitPeriods.forEach(period=> { %>
+                  <option value="<%= period._id %>">
+                    <%= period.period %>
+                  </option>
+                  <% }); %>
+              </select>
+            </div>
+            <div class="input-box" id="frequency-container">
+              <label for="frequency-text">Frequency:</label>
+              <span id="frequency-text"></span>
+            </div>
+            <div class="input-box">
+              <label for="startDate">Start Date:</label>
+              <input type="date" id="startDate" name="startDate" required>
+            </div>
+            <div class="input-box">
+              <label for="endDate">End Date (optional):</label>
+              <input type="date" id="endDate" name="endDate">
+            </div>
+
+            <div class="input-box" id="reminders-container">
+              <label>Reminders:</label>
+              <div class="reminder">
+                <input type="time" name="reminders[]" required>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="btn">
-        <button type="button" onclick="addReminder()">Add another reminder</button>
-        <button type="submit">Create Habit</button>
-      </div>
+        <div class="btn">
+          <button type="button" onclick="addReminder()">Add another reminder</button>
+          <button type="submit">Create Habit</button>
+        </div>
 
-    </form>
+      </form>
+    </div>
   </div>
 
 

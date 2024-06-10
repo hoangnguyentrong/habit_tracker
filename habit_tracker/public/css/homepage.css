@@ -17,11 +17,15 @@
     margin-bottom: 20px;
     background-color: #fff;
   }
+  table button{
+    box-shadow: 1px 1px 1px 1px rgb(181, 177, 177);
+
+  }
   
   th, td {
     border: 1px solid #ddd;
     padding: 8px;
-    text-align: left;
+    text-align:center;
   }
   
   th {
@@ -36,7 +40,7 @@
     background-color: #eaeaea;
   }
   
-  button {
+  .menu button {
     background-color: white;
     color: rgb(6, 6, 6);
     padding: 10px 20px;
@@ -45,23 +49,22 @@
     cursor: pointer;
     border-radius: 5px;
     font-size: 16px;
-    /* box-shadow: 1px 1px 1px 1px rgb(225, 215, 215); */
   }
   
-  button:hover {
+  .menu button:hover {
+    background-color: #ff6384;
+    color: white;
+  }
+  
+  .menu button:active {
     background-color: #e82044;
     color: white;
   }
   
-  button:active {
-    background-color: #e82044;
-    color: white;
-  }
-  
-  button:focus {
+  .menu button:focus {
     outline: none;
   }
-  .btn{
+  .menu .btn{
     background-color: white;
     position: fixed;
     top: 0pc;
@@ -70,7 +73,7 @@
     justify-content: space-between;
 
   }
-  .btn i{
+  .menu .btn i{
     width: 2pc;
   }
   .menu{
@@ -87,6 +90,6 @@
     border: 1px solid rgb(220, 217, 217);
     box-shadow: 1px 1px 1px 1px rgb(225, 215, 215);
   }
-  .custom-size {
+  .menu .custom-size {
     font-size: 1.4pc; /* Điều chỉnh kích thước theo ý bạn */
 }

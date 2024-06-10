@@ -1,0 +1,45 @@
+#chartContainer {
+    width: 300px;
+    /* Đặt chiều rộng container */
+    height: 300px;
+    /* Đặt chiều cao container */
+    margin: auto;
+    /* Căn giữa container */
+  }
+
+  canvas {
+    width: 100% !important;
+    /* Đảm bảo canvas chiếm toàn bộ diện tích container */
+    height: 100% !important;
+    /* Đảm bảo canvas chiếm toàn bộ diện tích container */
+  }
+
+  h1 {
+    text-align: center;
+  }
+
+  .ok {
+    text-align: center;
+    margin-top: 1pc;
+  }
+
+  .ok h2 {
+    margin-bottom: 1pc;
+  }
+
+  .ok table,
+  th,
+  td {
+    border: none;
+    background-color: transparent;
+  }
+
+
+  .total_habit {
+    width: 30pc;
+    margin: 0 auto;
+  }
+
+  .total_habit button {
+    box-shadow: 1px 1px 1px 1px rgb(181, 177, 177);
+  }

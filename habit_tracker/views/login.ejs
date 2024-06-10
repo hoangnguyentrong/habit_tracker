@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <title>User Login</title>
 </head>
+
 <body>
-    <h1>User Login</h1>
-    <form action="/v1/user/login" method="POST">
-        <input type="email" name="email_user" required placeholder="Enter your email">
-        <input type="password" name="password_user" required placeholder="Enter your password">
-        <button type="submit">Login</button>
-    </form>
-    <p>Don't have an account? <a href="/v1/user/signup">Sign up here</a></p>
+    <div class="wrapper">
+        <h1>Login</h1>
+        <form action="/v1/user/login" method="POST" id="login-form">
+            <div class="input-box">
+                <input type="email" name="email_user" required placeholder="Enter your email">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-box">
+                <input type="password" name="password_user" required placeholder="Enter your password">
+                <i class="fa-solid fa-lock"></i>
+            </div>
+            <button type="submit" class="btn">
+                Login
+            </button>
+            <div class="register-link">
+                <p>Don't have an account? <a href="/v1/user/signup">Sign up here</a></p>
+            </div>
+        </form>
+    </div>
+
 </body>
+
 </html>

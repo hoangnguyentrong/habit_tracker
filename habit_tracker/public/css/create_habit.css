@@ -4,14 +4,9 @@
     box-sizing: border-box;
     font-family: "Poppins";
 }
-body{
+.body{
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    background: url(./background1.jpg) no-repeat;
-    background-size: cover;
-    background-position: center;
 }
 .wrapper {
     background-color: #fff;
@@ -20,6 +15,7 @@ body{
     border-radius: 8px;
     width: 42pc;
     max-width: 100%;
+    height: 28pc;
 }
 
 h1 {
@@ -55,7 +51,7 @@ h1 {
     margin-bottom: 10px;
 }
 
-button {
+.wrapper button {
     width: 10pc;
     height: 3pc;
     padding: 10px;
@@ -72,18 +68,18 @@ button:hover {
 }
 
 button[type="button"] {
-    background-color: #e82044;
+    background-color: #ff6384;
     margin-bottom: 10px;
 }
 
 button[type="button"]:hover {
-    background-color: #fa0431;
+    background-color: #e42145;
 }
 .form{
     display: flex;
     justify-content: space-around;
 }
-.btn{
+.wrapper .btn{
     display: flex;
     justify-content: space-around;
 }

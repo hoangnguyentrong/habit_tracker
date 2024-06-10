@@ -43,8 +43,10 @@
           </td>
           <td>
             <!-- <button onclick="window.location.href = '/v1/goal_target?habit_id=<%= habit._id.toString() %>'">Create Habit</button> -->
-            <button onclick="window.location.href = '/v1/habit/updateProgress?habit_id=<%= habit._id %>'">Update
-              Progress</button>
+            <button class="option"
+              onclick="window.location.href = '/v1/habit/updateProgress?habit_id=<%= habit._id %>'">
+              <i class="fa-regular fa-pen-to-square"></i>
+            </button>
           </td>
         </tr>
         <%});%>

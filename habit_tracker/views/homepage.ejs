@@ -1,14 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="/css/homepage.css">
   <title>Document</title>
 </head>
+
 <body>
   <table>
     <thead>
- 
+
       <tr>
         <th>Name</th>
         <th>Goal Target</th>
@@ -16,31 +20,45 @@
         <th><i class="fa fa-sort-amount-asc" aria-hidden="true"></i></th>
         <th>Option</th>
       </tr>
-     
+
     </thead>
     <tbody>
-      <%habits.forEach(habit => {%>
-      <tr>
-        <td><%= habit.name%></td>
-        <td><%= habit.goalTarget%></td>
-        <td><%= habit.unit%></td>
-        <td>
-          <% habit.occurrences.forEach(occurrence => { %>
-            <div><%= occurrence.date.toDateString() %>: <%= occurrence.status %></div>
-          <% }); %>
-        </td>
-        <td>
-          <!-- <button onclick="window.location.href = '/v1/goal_target?habit_id=<%= habit._id.toString() %>'">Create Habit</button> -->
-          <button onclick="window.location.href = '/v1/habit/updateProgress?habit_id=<%= habit._id %>'">Update Progress</button>
-        </td>
-      </tr>
-      <%});%>
+      <%habits.forEach(habit=> {%>
+        <tr>
+          <td>
+            <%= habit.name%>
+          </td>
+          <td>
+            <%= habit.goalTarget%>
+          </td>
+          <td>
+            <%= habit.unit%>
+          </td>
+          <td>
+            <% habit.occurrences.forEach(occurrence=> { %>
+              <div>
+                <%= occurrence.date.toDateString() %>: <%= occurrence.status %>
+              </div>
+              <% }); %>
+          </td>
+          <td>
+            <!-- <button onclick="window.location.href = '/v1/goal_target?habit_id=<%= habit._id.toString() %>'">Create Habit</button> -->
+            <button onclick="window.location.href = '/v1/habit/updateProgress?habit_id=<%= habit._id %>'">Update
+              Progress</button>
+          </td>
+        </tr>
+        <%});%>
     </tbody>
   </table>
-  <button onclick="window.location.href = '/v1/habit/create'">Create Habit</button>
- 
-  <button onclick="window.location.href = '/v1/record'">Record Habit</button>
-  <button onclick="window.location.href = '/v1/user/profile'">Profile</button>
-  
+  <div class="menu">
+    <div class="btn">
+      <button onclick="window.location.href = '/v1/home'"><i class="fa-solid fa-house custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/habit/create'"><i class="fa-solid fa-plus custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/record'"><i class="fa-solid fa-file custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/user/profile'"><i class="fa-solid fa-gear custom-size"></i></button>
+
+    </div>
+  </div>
 </body>
+
 </html>

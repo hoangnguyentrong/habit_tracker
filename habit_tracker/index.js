@@ -33,6 +33,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 app.use(cors());
 app.use(morgan("common"));
+// Middleware để phục vụ các file tĩnh
+app.use(express.static('public'));
 app.use(
   session({
     secret: process.env.KEY_SESSION, // Ensure you set this in your .env file

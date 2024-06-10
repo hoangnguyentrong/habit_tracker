@@ -1,58 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="/css/homepage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <title>Document</title>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
   <style>
     #chartContainer {
-      width: 300px;  /* Đặt chiều rộng container */
-      height: 300px; /* Đặt chiều cao container */
-      margin: auto;  /* Căn giữa container */
+      width: 300px;
+      /* Đặt chiều rộng container */
+      height: 300px;
+      /* Đặt chiều cao container */
+      margin: auto;
+      /* Căn giữa container */
     }
+
     canvas {
-      width: 100% !important;  /* Đảm bảo canvas chiếm toàn bộ diện tích container */
-      height: 100% !important; /* Đảm bảo canvas chiếm toàn bộ diện tích container */
+      width: 100% !important;
+      /* Đảm bảo canvas chiếm toàn bộ diện tích container */
+      height: 100% !important;
+      /* Đảm bảo canvas chiếm toàn bộ diện tích container */
     }
   </style>
 </head>
+
 <body>
   <h1>Overall</h1>
   <select id="habitSelect" onchange="viewHabit()">
-    <% habits.forEach(habit => { %>
-      <option value="/v1/record/recordDetailHabit?habit_id=<%= habit._id %>"><%= habit.name %></option>
-    <% }) %>
+    <% habits.forEach(habit=> { %>
+      <option value="/v1/record/recordDetailHabit?habit_id=<%= habit._id %>">
+        <%= habit.name %>
+      </option>
+      <% }) %>
   </select>
   <div id="chartContainer">
     <canvas id="habitChart"></canvas>
   </div>
-  <p>Total completions: <%= totalFinish %>/<%= totalHabits%></p>
+  <p>Total completions: <%= totalFinish %>/<%= totalHabits%>
+  </p>
   <ul>
-    <% habits.forEach(habit => { %>
+    <% habits.forEach(habit=> { %>
       <li>
-        <h2><%= habit.name %></h2>
-        <button onclick="window.location.href = '/v1/record/recordDetailHabit?habit_id=<%= habit._id %>'">View Habit</button>
+        <h2>
+          <%= habit.name %>
+        </h2>
+        <button onclick="window.location.href = '/v1/record/recordDetailHabit?habit_id=<%= habit._id %>'">View
+          Habit</button>
       </li>
-    <% }) %>
+      <% }) %>
   </ul>
   <div id="data" data-total-finish="<%= totalFinish %>" data-total-habits="<%= totalHabits %>"></div>
   <button onclick="window.location.href = '/v1/home'">Back to Home</button>
 
+  <div class="menu">
+    <div class="btn">
+      <button onclick="window.location.href = '/v1/home'"><i class="fa-solid fa-house custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/habit/create'"><i class="fa-solid fa-plus custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/record'"><i class="fa-solid fa-file custom-size"></i></button>
+      <button onclick="window.location.href = '/v1/user/profile'"><i class="fa-solid fa-gear custom-size"></i></button>
 
+    </div>
+  </div>
   <script>
-      function viewHabit() {
-    const select = document.getElementById('habitSelect');
-    const habitUrl = select.options[select.selectedIndex].value;
-    window.location.href = habitUrl;
-  }
+    function viewHabit() {
+      const select = document.getElementById('habitSelect');
+      const habitUrl = select.options[select.selectedIndex].value;
+      window.location.href = habitUrl;
+    }
     document.addEventListener('DOMContentLoaded', (event) => {
       const dataDiv = document.getElementById('data');
       const totalFinish = parseInt(dataDiv.getAttribute('data-total-finish'));
       const totalHabits = parseInt(dataDiv.getAttribute('data-total-habits'));
       const remainingHabits = totalHabits - totalFinish;
-      
+
       const ctx = document.getElementById('habitChart').getContext('2d');
 
       const data = {
@@ -95,4 +119,5 @@
     });
   </script>
 </body>
+
 </html>

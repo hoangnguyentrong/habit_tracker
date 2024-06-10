@@ -26,19 +26,24 @@
 </head>
 <body>  <div id="chartContainer">
   <canvas id="habitChart"></canvas>
+  <br>
 </div>
   <table>
     <tr>
-      <td><%= habit.name%></td><br>
+      <!-- <td><%= habit.name%></td><br>
       <td><%= habit.goalTarget%></td><br>
-      <td><%= habit.unit%></td>
+      <td><%= habit.unit%></td><br> -->
       <td>
         <%
          let totalProgress = 0;
+         let numFinish = 0;
          habit.occurrences.forEach(occurrence =>{
          totalProgress += occurrence.progress;
+         if(occurrence.status === 'finish'){
+          numFinish++;
+         }
            %>
-          <div> <%= occurrence.progress %></div>
+          <!-- <div> <%= occurrence.progress %></div> -->
         <% }); %>
         
         <% 
@@ -50,6 +55,10 @@
           
       </td>
       
+    </tr>
+    <tr>
+      <td>Number of Finishs</td>
+      <td><%= numFinish %></td>
     </tr>
   </table>
   <div id="data" data-total-finish="<%= totalProgress %>" data-total-habits=" <%= lengthOccurences 

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Homepage</title>
+  <link rel="stylesheet" href="/path/to/your/css/styles.css">
+</head>
+<body>
+  <h1>Admin Homepage</h1>
+  <h2>List of Users</h2>
+  <table>
+    <thead>
+      <tr>
+
+        <th>Email</th>
+        <th>Name</th>
+        <th>Rule</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% users.forEach(function(user) { %>
+        <tr>
+
+          <td><%= user.email_user %></td>
+          <td><%= user.name_user %></td>
+          <td><%= user.rule_user === 1 ? 'Admin' : 'User' %></td>
+          <td>
+            <button onclick="window.location.href = '/v1/home/userDetail?userId=<%= user._id %>'">Update Progress</button>
+          </td>
+          
+        </tr>
+      <% }); %>
+    </tbody>
+  </table>
+  <form action="/v1/user/logout" method="POST">
+   
+    <button type="submit">Logout</button>
+</form>
+</body>
+</html>

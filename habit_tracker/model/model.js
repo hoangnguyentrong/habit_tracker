@@ -26,6 +26,11 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  rule_user: {
+    type: Number,
+    default: 0,  // Default value for regular users
+    required: true,
+  },
 });
 
 // Habit Schema

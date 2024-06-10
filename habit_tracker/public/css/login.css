@@ -1,0 +1,101 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins";
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: url(./background1.jpg) no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+.wrapper {
+    background-color: #fff;
+    padding: 20px 30px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    width: 42pc;
+    max-width: 100%;
+}
+
+/* Định dạng tiêu đề chính */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Định dạng các input box */
+.input-box {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+/* Định dạng các label */
+.input-box label {
+    flex: 1;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+/* Định dạng các input và select */
+.input-box input,
+.input-box select {
+    flex: 2;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Định dạng cho khung chứa reminders */
+#reminders-container {
+    margin-bottom: 15px;
+}
+
+/* Định dạng cho các reminders */
+.reminder {
+    margin-bottom: 10px;
+}
+
+/* Định dạng cho các nút bấm */
+button {
+    width: 10pc;
+    height: 3pc;
+    padding: 10px;
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+/* Đổi màu nền nút bấm khi hover */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Định dạng cho nút "Add another reminder" */
+button[type="button"] {
+    background-color: #e82044;
+    margin-bottom: 10px;
+}
+
+/* Đổi màu nền nút "Add another reminder" khi hover */
+button[type="button"]:hover {
+    background-color: #fa0431;
+}
+.form{
+    display: flex;
+    justify-content: space-around;
+}
+.btn{
+    display: flex;
+    justify-content: space-around;
+}
+
+

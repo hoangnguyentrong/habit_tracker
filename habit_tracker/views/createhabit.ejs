@@ -3,60 +3,83 @@
 
 <head>
   <title>Create Habit</title>
+  <link rel="stylesheet" href="/css/login.css">
+
 </head>
 
 <body>
-  <h1>Create a New Habit</h1>
-  <form action="/v1/habit/create" method="POST">
-    <div>
-      <label for="name">Habit Name:</label>
-      <input type="text" id="name" name="name" required>
-    </div>
-    <div>
-      <label for="description">Description:</label>
-      <input type="text" id="description" name="description" required>
-    </div>
-    <div>
-      <label for="unit">Unit:</label>
-      <input type="text" id="unit" name="unit" required>
-    </div>
-    <div>
-      <label for="goalTarget">Goal Target:</label>
-      <input type="number" id="goalTarget" name="goalTarget" required>
-    </div>
-    <div>
-      <label for="period">Period:</label>
-      <select id="period" name="period" required>
-        <% habitPeriods.forEach(period=> { %>
-          <option value="<%= period._id %>">
-            <%= period.period %>
-          </option>
-          <% }); %>
-      </select>
-    </div>
-    <div id="frequency-container">
-      <label for="frequency-text">Frequency:</label>
-      <span id="frequency-text"></span>
-    </div>
-    <div>
-      <label for="startDate">Start Date:</label>
-      <input type="date" id="startDate" name="startDate" required>
-    </div>
-    <div>
-      <label for="endDate">End Date (optional):</label>
-      <input type="date" id="endDate" name="endDate">
-    </div>
+  <div class="wrapper">
+    <h1>Create a New Habit</h1>
+    <form action="/v1/habit/create" method="POST">
+      <div class="form">
+        <div>
+          <div class="input-box">
+            <label for="name">Habit Name:</label>
+            <input type="text" id="name" name="name" required>
+          </div>
+          <div class="input-box">
+            <label for="description">Description:</label>
+            <input type="text" id="description" name="description" required>
+          </div>
+          <div class="input-box">
+            <label for="type">Type:</label>
+            <select id="type" name="type" required>
+              <% habitTypes.forEach(type=> { %>
+                <option value="<%= type._id %>">
+                  <%= type.type %>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <div class="input-box">
+            <label for="unit">Unit:</label>
+            <input type="text" id="unit" name="unit" required>
+          </div>
+          <div class="input-box">
+            <label for="goalTarget">Goal Target:</label>
+            <input type="number" id="goalTarget" name="goalTarget" required>
+          </div>
+        </div>
+        <div>
+          <div class="input-box">
+            <label for="period">Period:</label>
+            <select id="period" name="period" required>
+              <% habitPeriods.forEach(period=> { %>
+                <option value="<%= period._id %>">
+                  <%= period.period %>
+                </option>
+                <% }); %>
+            </select>
+          </div>
+          <div class="input-box" id="frequency-container">
+            <label for="frequency-text">Frequency:</label>
+            <span id="frequency-text"></span>
+          </div>
+          <div class="input-box">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+          </div>
+          <div class="input-box">
+            <label for="endDate">End Date (optional):</label>
+            <input type="date" id="endDate" name="endDate">
+          </div>
 
-    <div id="reminders-container">
-      <label>Reminders:</label>
-      <div class="reminder">
-        <input type="time" name="reminders[]">
+          <div class="input-box" id="reminders-container">
+            <label>Reminders:</label>
+            <div class="reminder">
+              <input type="time" name="reminders[]" required>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <button type="button" onclick="addReminder()">Add another reminder</button>
-    <button type="submit">Create Habit</button>
-    </div>
-  </form>
+      <div class="btn">
+        <button type="button" onclick="addReminder()">Add another reminder</button>
+        <button type="submit">Create Habit</button>
+      </div>
+
+    </form>
+  </div>
+
 
   <script>
 

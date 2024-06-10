@@ -1,11 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Record Detail Habit</title>
 </head>
-<body>
+<tbody>
   
-</body>
+  <tr>
+    <td><%= habit.name%></td><br>
+    <td><%= habit.goalTarget%></td><br>
+    <td><%= habit.unit%></td>
+    <td>
+      <%
+     
+       let totalProgress = 0;
+       habit.occurrences.forEach(occurrence =>{
+       totalProgress += occurrence.progress;
+         %>
+        <div> <%= occurrence.progress %></div>
+      <% }); %>
+      
+      <% 
+      let lengthOccurences = habit.occurrences.length;
+      %>
+      <div>Total Occurrences: <%= lengthOccurences 
+        * habit.goalTarget
+        %></div>
+      <div>Total Occurrences: <%= habit.occurrences.length %></div>
+      <div>Total Progress : <%= totalProgress%></div>
+     
+    </td>
+    
+  </tr>
+  <button onclick="window.location.href = '/v1/record'">Back to Home</button>
+ 
+</tbody>
 </html>

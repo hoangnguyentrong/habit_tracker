@@ -87,7 +87,6 @@ const habitController = {
   },
   updateProgress : async(req,res)=>{
     const habitId = req.query.habit_id;
-
     const progress = req.body.progress;
 
     try {
@@ -96,28 +95,25 @@ const habitController = {
         if (!habit) {
             return res.status(404).send('Habit không tồn tại.');
         }
-        // Tính tổng progress của tất cả các occurrences
-        let totalProgress = habit.occurrences.reduce((total, occurrence) => total + occurrence.progress, 0);
-
-        // Cộng thêm giá trị mới từ người dùng nhập
-        totalProgress += parseInt(progress);
-        const currentDate = new Date();
-        const localDate = new Date(currentDate.toLocaleString());
-        
+        const currentDate = new Date(); // Lấy ngày hiện tại
         let todayOccurrence = habit.occurrences.find(occurrence => {
-            return occurrence.date.toDateString() === localDate.toDateString();
-        });
-        if (!todayOccurrence) {
-            todayOccurrence = {
-                date: localDate,
-                progress: 0,
-                status: 'pending'
-            };
-            habit.occurrences.push(todayOccurrence);
-        }
+    // Tìm occurrence của ngày hiện tại
+    return occurrence.date.toDateString() === currentDate.toDateString();
+});
 
-        todayOccurrence.progress = totalProgress;
-        todayOccurrence.status = (totalProgress >= habit.goalTarget) ? 'finish' : 'pending';
+// Nếu không có occurrence cho ngày hiện tại, tạo một occurrence mới
+if (!todayOccurrence) {
+    todayOccurrence = {
+        date: currentDate,
+        progress: 0,
+        status: 'pending'
+    };
+    habit.occurrences.push(todayOccurrence);
+}
+
+// Cộng thêm giá trị mới từ người dùng nhập vào progress của occurrence của ngày hiện tại
+        todayOccurrence.progress += parseInt(progress);
+        todayOccurrence.status = (todayOccurrence.progress >= habit.goalTarget) ? 'finish' : 'pending';
 
         await habit.save();
         return res.redirect(`/v1/habit/updateProgress?habit_id=${habitId}`);
@@ -142,23 +138,16 @@ const habitController = {
             return occurrence.date.toDateString() === localDate.toDateString();
         });
         if (todayOccurrence) {
-  
-                // date: localDate,
                 todayOccurrence.progress= 0,
                 todayOccurrence.status= 'pending'
-            // habit.occurrences.push(todayOccurrence);
+
         }
 
 
         await habit.save();
-        // return res.send(`
-        //   <script>
-        //     window.location.href = window.location.href;
-        //   </script>
-        // `);
+
         return res.redirect(`/v1/habit/updateProgress?habit_id=${habitId}`);
-        // return res.redirect("/v1/habit/updateProgress")
-        // return res.status(200).send('Cập nhật progress thành công.');
+
     } catch (error) {
         console.error('Lỗi khi cập nhật progress:', error);
         return res.status(500).send('Đã xảy ra lỗi khi cập nhật progress.');
@@ -215,8 +204,12 @@ const habitController = {
       const habitId = req.params.habit_id;
       const deletedHabit = await Habit.findByIdAndDelete(habitId);
       if (deletedHabit) {
+        const user = await User.updateOne(
+          {},
+          { $pull: { habits: { habitId: habitId } } }
+        );
         return res.redirect("/v1/home");
-        // res.status(200).json("Deleted successfully!");
+  
       } else {
         res.status(404).json("Habit not found!");
       }

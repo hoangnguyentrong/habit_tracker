@@ -10,7 +10,7 @@
 </head>
 
 <body>
-  <input type="date" id="habit-date" value="<%= new Date().toISOString().split('T')[0] %>">
+  <input type="date" id="habit-date" value="<%= new Date().toLocaleDateString() %>">
   <button onclick="loadHabits()">Load Habits</button>
   <table>
     <thead>

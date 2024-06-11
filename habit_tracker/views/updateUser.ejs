@@ -19,12 +19,11 @@
       <button onclick="window.location.href = '/v1/user/updateUser'">
         <i class="fa-solid fa-gear custom-size"></i>
       </button>
-
     </div>
   </div>
   <div class="wrapper">
     <h1>Information</h1>
-    <form action="/v1/user/updateUser/<%= user._id %>" method=" POST">
+    <form action="/v1/user/updateUser/<%= user._id %>" method="POST">
       <div class="input-box">
         <label for="email">Email:</label>
         <input type="email" id="email_user" name="email_user" value="<%= user.email_user %>" required>

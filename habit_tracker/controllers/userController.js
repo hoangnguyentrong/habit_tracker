@@ -104,17 +104,18 @@ getAllUser: async (req, res) => {
       res.status(500).json({ success: false, message: "Lỗi khi tải trang chủ" });
     }
  },
-updateUser: async (req, res) => {
-    try {
-      const user = await User.findById(req.params.id);
-      await user.updateOne({ $set: req.body });
-      return res.redirect("/v1/home");
-      // res.status(200).json("Update successfully");
-    } catch (error) {
-      res.status(500).json(error);
+ updateUser: async (req, res) => {
+  try {
+    const user = await User.findById(req.params.id);
+    if (!user) {
+      return res.status(404).json({ message: 'Người dùng không tồn tại' });
     }
-  },
-
+    await user.updateOne({ $set: req.body });
+    return res.redirect("/v1/home");
+    // res.status(200).json("Cập nhật thành công");
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+},
 };
-
 module.exports = userController;
